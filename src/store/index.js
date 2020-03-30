@@ -14,25 +14,46 @@ export default new Vuex.Store({
       }
   },
   getters:{
+
+      loggedIn(state){
+          if (state.access_token !== null){
+              return new Promise((resolve, reject) => {
+                  axios.get('http://backend.iitu.local/api/auth/validate-token')
+                      // eslint-disable-next-line no-unused-vars
+                      .then(function (response) {
+                          resolve(response.data)
+                      })
+                      .catch(function (error) {
+                          console.log(error)
+                          reject(error)
+                      });
+              })
+          }
+        return false
+      },
+
       getToken(state){
           return state.access_token
       }
   },
   actions: {
     retrieveToken(context,data){
-      axios.post('http://dl.iitu.local/api/login', {
-        username: data.username,
-        password: data.password
-      })
-          .then(function (response) {
-            const access_token = response.data.access_token
-            localStorage.setItem('access_token',access_token)
-            context.commit('retrieveToken',access_token)
-          })
-          .catch(function (error) {
-            console.log(error)
-          });
-
+        return new Promise((resolve, reject) => {
+            axios.post('http://backend.iitu.local/api/auth/login', {
+                username: data.username,
+                password: data.password
+            })
+                .then(function (response) {
+                    const access_token = response.data.access_token
+                    localStorage.setItem('access_token',access_token)
+                    context.commit('retrieveToken',access_token)
+                    resolve(response)
+                })
+                .catch(function (error) {
+                    console.log(error)
+                    reject(error)
+                });
+        })
     }
   },
 })

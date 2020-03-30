@@ -10,7 +10,8 @@
                 <b-nav-text class = 'c-message'>Вы не вошли в систему</b-nav-text>
             </div>
             <div class="c-navbar-item">
-                <b-nav-item href="/login" class = "">Вход</b-nav-item>
+                <b-nav-item v-if="!loggedIn" href="/login" class = "">Вход</b-nav-item>
+                <b-nav-item v-else href="/login" class = "">Выход</b-nav-item>
             </div>
         </b-nav>
     </div>
@@ -18,7 +19,16 @@
 
 <script>
     export default {
-        name: "NavBar"
+        name: "NavBar",
+        computed:{
+            loggedIn(){
+                return this.$store.getters.loggedIn
+            }
+        },
+        mounted(){
+            console.log(this.$store.getters.loggedIn)
+        }
+
     }
 </script>
 

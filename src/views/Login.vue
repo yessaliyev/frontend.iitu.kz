@@ -55,14 +55,20 @@
         },
         methods: {
             onSubmit(evt) {
-                evt.preventDefault()
+                evt.preventDefault();
 
                 this.$store.dispatch('retrieveToken',{
                     username: this.form.username,
                     password: this.form.password
                 })
+                .then(response => {
+                    console.log(response);
+                    this.$router.push({name: "Home"})
+                });
 
-                console.log(this.$store.getters.getToken)
+                // console.log(this.$store.getters.getToken)
+
+
             }
         }
     }

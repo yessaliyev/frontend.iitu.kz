@@ -19,7 +19,7 @@
             }
         },
         mounted(){
-            axios.get('http://dl.iitu.local/api/get-news')
+            axios.get('http://backend.iitu.local/api/get-news')
                 .then(response => {
                     this.news = response.data
                 })
