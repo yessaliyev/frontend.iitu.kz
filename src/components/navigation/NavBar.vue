@@ -6,27 +6,48 @@
                     <b-nav-item href="https://dl.iitu.kz">dl.iitu.kz</b-nav-item>
                 </div>
             </div>
-            <div class="c-navbar-item">
+            <div v-if="logged_user.length === 0" class="c-navbar-item">
                 <b-nav-text class = 'c-message'>Вы не вошли в систему</b-nav-text>
             </div>
-            <div class="c-navbar-item">
-                <b-nav-item v-if="!loggedIn" href="/login" class = "">Вход</b-nav-item>
-                <b-nav-item v-else href="/login" class = "">Выход</b-nav-item>
+            <div v-if="logged_user.length === 0" class="c-navbar-item">
+                <b-nav-item  href="/login" class = "">Вход</b-nav-item>
+            </div>
+            <div v-if="logged_user.length !== 0" class="c-navbar-item">
+                <b-nav-text class = 'c-message'>Добро пожаловать</b-nav-text>
+            </div>
+            <div v-if="logged_user.length !== 0" class="c-navbar-item ">
+                <div class="c-navbar-dropdown">
+                    <b-dropdown right :text="logged_user.username">
+                        <b-dropdown-item href="#">An item</b-dropdown-item>
+                        <b-dropdown-item href="#">Another item</b-dropdown-item>
+                    </b-dropdown>
+                </div>
             </div>
         </b-nav>
     </div>
 </template>
 
 <script>
+    import axios from "axios";
+
     export default {
         name: "NavBar",
-        computed:{
-            loggedIn(){
-                return this.$store.getters.loggedIn
+        data() {
+            return {
+                logged_user:[]
             }
         },
-        mounted(){
-            console.log(this.$store.getters.loggedIn)
+        beforeMount(){
+            if (this.$store.getters.getToken !== null){
+                axios.get('http://backend.iitu.local/api/user/get',
+                    {headers: {Authorization: "Bearer " + this.$store.getters.getToken}})
+                    .then(response => {
+                        this.logged_user = response.data
+                    })
+                    .catch(function (e) {
+                        console.log(e)
+                    })
+            }
         }
 
     }
@@ -42,9 +63,9 @@
         z-index: 100;
         padding: 10px 10px;
         display: grid;
-        grid-template-columns: 0.05fr 0.9fr 0.05fr;
+        grid-template-columns: 0.07fr 0.9fr 0.03fr;
         color: white;
-        border: 1px solid red;
+        /*border: 1px solid red;*/
         margin-bottom: 35px;
     }
     .c-navbar a{
@@ -60,6 +81,7 @@
     }
 
     .c-message{
+        padding-right: 10px;
         float: right;
     }
 

@@ -39,6 +39,7 @@
 
 <script>
     import NavBar from "../components/navigation/NavBar";
+    import axios from "axios";
 
     export default {
         name: "Login",
@@ -65,10 +66,20 @@
                     console.log(response);
                     this.$router.push({name: "Home"})
                 });
-
-                // console.log(this.$store.getters.getToken)
-
-
+            }
+        },
+        beforeMount(){
+            if (this.$store.getters.getToken !== null){
+                axios.get('http://backend.iitu.local/api/user/get',
+                    {headers: {Authorization: "Bearer " + this.$store.getters.getToken}})
+                    .then(response => {
+                        if (response.status === 200){
+                            this.$router.push({name: "Home"})
+                        }
+                    })
+                    .catch(function (e) {
+                        console.log(e)
+                    })
             }
         }
     }

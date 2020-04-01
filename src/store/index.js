@@ -6,32 +6,18 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    access_token:localStorage.getItem('access_token')||null
+      access_token:localStorage.getItem('access_token')||null,
+      refresh_token:localStorage.getItem('refresh_token')||null,
   },
   mutations: {
       retrieveToken(state,access_token){
           this.state.access_token = access_token
+      },
+      logged_in(state,status){
+          this.state.logged_in = status
       }
   },
   getters:{
-
-      loggedIn(state){
-          if (state.access_token !== null){
-              return new Promise((resolve, reject) => {
-                  axios.get('http://backend.iitu.local/api/auth/validate-token')
-                      // eslint-disable-next-line no-unused-vars
-                      .then(function (response) {
-                          resolve(response.data)
-                      })
-                      .catch(function (error) {
-                          console.log(error)
-                          reject(error)
-                      });
-              })
-          }
-        return false
-      },
-
       getToken(state){
           return state.access_token
       }
@@ -51,6 +37,27 @@ export default new Vuex.Store({
                 })
                 .catch(function (error) {
                     console.log(error)
+                    reject(error)
+                });
+        })
+    },
+    logged_in(context,data){
+        return new Promise((resolve, reject) => {
+            axios.post('http://backend.iitu.local/api/auth/validate-token', {}, {headers: { Authorization: "Bearer " + data.token }})
+                .then(function (response) {
+                    const status = response.status
+                    if (status === 200) {
+                        localStorage.setItem('logged_in','true')
+                        context.commit('logged_in','true')
+                    }else{
+                        localStorage.setItem('logged_in','false')
+                        context.commit('logged_in','false')
+                    }
+                    resolve(response)
+                })
+                .catch(function (error) {
+                    localStorage.setItem('logged_in','false')
+                    context.commit('logged_in','false')
                     reject(error)
                 });
         })
