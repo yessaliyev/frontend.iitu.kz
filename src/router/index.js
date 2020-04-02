@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import Student from "../views/Student";
 
 Vue.use(VueRouter)
 
@@ -23,6 +24,11 @@ const routes = [
     name: 'Login',
 
     component: () => import('../views/Login.vue')
+  },
+  {
+    path:'/student/:id',
+    name:'Student',
+    component: Student
   }
 ]
 

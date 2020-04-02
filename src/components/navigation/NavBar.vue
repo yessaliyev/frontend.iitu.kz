@@ -3,7 +3,7 @@
         <b-nav class="c-navbar" align="right">
             <div class="c-navbar-item">
                 <div>
-                    <b-nav-item href="https://dl.iitu.kz">dl.iitu.kz</b-nav-item>
+                    <b-nav-item href="/">dl.iitu.kz</b-nav-item>
                 </div>
             </div>
             <div v-if="logged_user.length === 0" class="c-navbar-item">
@@ -18,8 +18,8 @@
             <div v-if="logged_user.length !== 0" class="c-navbar-item ">
                 <div class="c-navbar-dropdown">
                     <b-dropdown right :text="logged_user.username">
-                        <b-dropdown-item href="#">An item</b-dropdown-item>
-                        <b-dropdown-item href="#">Another item</b-dropdown-item>
+                        <b-dropdown-item :href="'/student/' +logged_user.id">My profile</b-dropdown-item>
+                        <b-dropdown-item href="#">My courses</b-dropdown-item>
                     </b-dropdown>
                 </div>
             </div>
@@ -42,6 +42,7 @@
                 axios.get('http://backend.iitu.local/api/user/get',
                     {headers: {Authorization: "Bearer " + this.$store.getters.getToken}})
                     .then(response => {
+                        console.log(response.data)
                         this.logged_user = response.data
                     })
                     .catch(function (e) {

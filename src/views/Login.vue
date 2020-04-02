@@ -39,7 +39,7 @@
 
 <script>
     import NavBar from "../components/navigation/NavBar";
-    import axios from "axios";
+    // import axios from "axios";
 
     export default {
         name: "Login",
@@ -63,25 +63,28 @@
                     password: this.form.password
                 })
                 .then(response => {
-                    console.log(response);
-                    this.$router.push({name: "Home"})
+                    console.log(response.data)
+                    if (response.data.roles[0].role === 'admin'){
+                        this.$router.push({name:"Student",params:{id:response.data.roles[0].pivot.user_id}})
+                    }
+                    // this.$router.push({name: "student",params:{id:response.data.id}})
                 });
             }
         },
-        beforeMount(){
-            if (this.$store.getters.getToken !== null){
-                axios.get('http://backend.iitu.local/api/user/get',
-                    {headers: {Authorization: "Bearer " + this.$store.getters.getToken}})
-                    .then(response => {
-                        if (response.status === 200){
-                            this.$router.push({name: "Home"})
-                        }
-                    })
-                    .catch(function (e) {
-                        console.log(e)
-                    })
-            }
-        }
+        // beforeMount(){
+        //     if (this.$store.getters.getToken !== null){
+        //         axios.get('http://backend.iitu.local/api/user/get',
+        //             {headers: {Authorization: "Bearer " + this.$store.getters.getToken}})
+        //             .then(response => {
+        //                 if (response.status === 200){
+        //                     this.$router.push({name: "Home"})
+        //                 }
+        //             })
+        //             .catch(function (e) {
+        //                 console.log(e)
+        //             })
+        //     }
+        // }
     }
 </script>
 
