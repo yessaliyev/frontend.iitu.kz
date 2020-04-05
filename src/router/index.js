@@ -2,6 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Student from "../views/Student";
+import Teacher from "../views/Teacher";
+import Admin from "../views/Admin";
 
 Vue.use(VueRouter)
 
@@ -29,6 +31,16 @@ const routes = [
     path:'/student/:id',
     name:'Student',
     component: Student
+  },
+  {
+    path:'/teacher/:id',
+    name:'Teacher',
+    component: Teacher
+  },
+  {
+    path:'/admin',
+    name:'Admin',
+    component: Admin
   }
 ]
 

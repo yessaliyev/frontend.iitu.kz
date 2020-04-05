@@ -64,7 +64,7 @@
                 })
                 .then(response => {
                     console.log(response.data)
-                    if (response.data.roles[0].role === 'admin'){
+                    if (response.data.roles[0].role === 'student'){
                         this.$router.push({name:"Student",params:{id:response.data.roles[0].pivot.user_id}})
                     }
                     this.$router.push({name: "student",params:{id:response.data.id}})
