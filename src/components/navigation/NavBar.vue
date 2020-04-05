@@ -38,9 +38,9 @@
             }
         },
         beforeMount(){
-            if (this.$store.getters.getToken !== null){
+            if (this.$store.getters.access_token !== null){
                 axios.get('http://backend.iitu.local/api/user/get',
-                    {headers: {Authorization: "Bearer " + this.$store.getters.getToken}})
+                    {headers: {Authorization: "Bearer " + this.$store.getters.access_token}})
                     .then(response => {
                         console.log(response.data)
                         this.logged_user = response.data

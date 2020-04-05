@@ -39,7 +39,7 @@
 
 <script>
     import NavBar from "../components/navigation/NavBar";
-    // import axios from "axios";
+    import axios from "axios";
 
     export default {
         name: "Login",
@@ -58,7 +58,7 @@
             onSubmit(evt) {
                 evt.preventDefault();
 
-                this.$store.dispatch('retrieveToken',{
+                this.$store.dispatch('retrieveUser',{
                     username: this.form.username,
                     password: this.form.password
                 })
@@ -67,24 +67,26 @@
                     if (response.data.roles[0].role === 'admin'){
                         this.$router.push({name:"Student",params:{id:response.data.roles[0].pivot.user_id}})
                     }
-                    // this.$router.push({name: "student",params:{id:response.data.id}})
+                    this.$router.push({name: "student",params:{id:response.data.id}})
                 });
             }
         },
-        // beforeMount(){
-        //     if (this.$store.getters.getToken !== null){
-        //         axios.get('http://backend.iitu.local/api/user/get',
-        //             {headers: {Authorization: "Bearer " + this.$store.getters.getToken}})
-        //             .then(response => {
-        //                 if (response.status === 200){
-        //                     this.$router.push({name: "Home"})
-        //                 }
-        //             })
-        //             .catch(function (e) {
-        //                 console.log(e)
-        //             })
-        //     }
-        // }
+        beforeMount(){
+            console.log(this.$store.getters.access_token)
+            if (this.$store.getters.access_token !== null){
+                axios.get('http://backend.iitu.local/api/user/get',
+                    {headers: {Authorization: "Bearer " + this.$store.getters.access_token}})
+                    .then(response => {
+                        if (response.status === 200){
+                            console.log('good')
+                            this.$router.push({name: "Home"})
+                        }
+                    })
+                    .catch(function (e) {
+                        console.log(e)
+                    })
+            }
+        }
     }
 </script>
 

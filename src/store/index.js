@@ -8,22 +8,33 @@ export default new Vuex.Store({
   state: {
       access_token:localStorage.getItem('access_token')||null,
       refresh_token:localStorage.getItem('refresh_token')||null,
+      username:localStorage.getItem('username')||null,
+      user_id:localStorage.getItem('user_id')||null,
   },
+
   mutations: {
-      retrieveToken(state,access_token){
+      setAccessToken(state,access_token){
           this.state.access_token = access_token
       },
-      logged_in(state,status){
-          this.state.logged_in = status
-      }
+      setRefreshToken(state,refresh_token){
+          this.state.refresh_token = refresh_token
+      },
+      setUsername(state,username){
+          this.state.username = username
+      },
+      setUserId(state,user_id){
+          this.state.user_id = user_id
+      },
+
   },
   getters:{
-      getToken(state){
+      access_token(state){
           return state.access_token
-      }
+      },
+
   },
   actions: {
-    retrieveToken(context,data){
+    retrieveUser(context,data){
         return new Promise((resolve, reject) => {
             axios.post('http://backend.iitu.local/api/auth/login', {
                 username: data.username,
@@ -31,8 +42,22 @@ export default new Vuex.Store({
             })
                 .then(function (response) {
                     const access_token = response.data.access_token
+                    const refresh_token = response.data.refresh_token
+                    const username = response.data.username
+                    const user_id = response.data.user_id
+
                     localStorage.setItem('access_token',access_token)
-                    context.commit('retrieveToken',access_token)
+                    context.commit('setAccessToken',access_token)
+
+                    localStorage.setItem('refresh_token',refresh_token)
+                    context.commit('setRefreshToken',refresh_token)
+
+                    localStorage.setItem('username',username)
+                    context.commit("setUsername",username)
+
+                    localStorage.setItem('user_id',user_id)
+                    context.commit('setUserId',user_id)
+
                     resolve(response)
                 })
                 .catch(function (error) {
