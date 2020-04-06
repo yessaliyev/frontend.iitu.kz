@@ -50,12 +50,14 @@
                                 v-model="form.course"
                                 :options="course">
                         </b-form-select>
+                        <div class="test">
+                        <h4>hello</h4>
                         <b-form-select
                                 v-if = "form.course !== null && form.role.role_name === 'student'"
-                                v-on:change="onChange($event)"
                                 v-model="form.group_id"
                                 :options="groups">
                         </b-form-select>
+                        </div>
                         <p>forgot password?</p>
                         <b-button type="submit" variant="primary" class="c-center">Submit</b-button>
                     </b-form>
@@ -177,7 +179,7 @@
 <style scoped>
     .login-block{
         display: grid;
-         border: 2px solid red;
+        border: 2px solid red;
         width: 30%;
         /*height: 80vh;*/
 
@@ -199,6 +201,10 @@
 
     .c-center{
         text-align: center;
+    }
+    .test{
+        margin-top: 15px;
+        border: 1px solid red;
     }
 
 </style>
