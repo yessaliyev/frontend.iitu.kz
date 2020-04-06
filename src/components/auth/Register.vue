@@ -44,6 +44,18 @@
                                 v-model="form.department_id"
                                 :options="departments">
                         </b-form-select>
+                        <b-form-select
+                                v-if = "form.role !== null && form.role.role_name === 'student' "
+                                v-on:change="onChange($event)"
+                                v-model="form.course"
+                                :options="course">
+                        </b-form-select>
+                        <b-form-select
+                                v-if = "form.course !== null && form.role.role_name === 'student'"
+                                v-on:change="onChange($event)"
+                                v-model="form.group_id"
+                                :options="groups">
+                        </b-form-select>
                         <p>forgot password?</p>
                         <b-button type="submit" variant="primary" class="c-center">Submit</b-button>
                     </b-form>
@@ -69,12 +81,20 @@
                     regalia_en:'',
                     regalia_kk:'',
                     regalia_ru:'',
-                    department_id:null
+                    department_id:null,
+                    course:null,
+                    group_id:null
                 },
+                course:[
+                    {text:"please select course",value: null},
+                    {text:1,value:1},
+                    {text:2,value:2},
+                    {text:3,value:3},
+                    {text:4,value:4}
+                ],
                 role_options:[],
-                departments:[],
-                groups:[],
-                course:''
+                departments:[{text:"please select department",value:null}],
+                groups:[{text:"please select group",value:null}],
             }
         },
         methods:{
@@ -90,10 +110,26 @@
                         console.log(error)
                     });
             },
-            getGroups(){
-                axios.get('http://backend.iitu.local/api/group/get')
+            getCourses(){
+                axios.get('http://backend.iitu.local/api/department/get-all')
                     .then(response => {
-                        this.departments = response.data
+                        for (const department of response.data){
+                            if (response.data.length <= this.departments.length){ break }
+                            this.departments.push({text:department.name_en,value:department.id})
+                        }
+                    })
+                    .catch(function (error) {
+                        console.log(error)
+                    });
+            },
+            getGroups(course){
+                axios.get('http://backend.iitu.local/api/group/get-all?course=' + course)
+                    .then(response => {
+                        console.log(response.data)
+                        for (const group of response.data){
+                            console.log({text:group.name_en,value:group.id})
+                            this.groups.push({text:group.name_en,value:group.id})
+                        }
                     })
                     .catch(function (error) {
                         console.log(error)
@@ -117,6 +153,9 @@
             onChange(event){
                 if (event.role_name === 'teacher'){
                     this.getDepartments()
+                }
+                if (this.form.course !== null){
+                    this.getGroups(event)
                 }
             }
 
