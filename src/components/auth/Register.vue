@@ -17,7 +17,6 @@
                                     placeholder="Enter username"
                             ></b-form-input>
                         </b-form-group>
-
                         <b-form-group
                                 id="input-group-2"
                                 label="Your Name:"
@@ -30,7 +29,7 @@
                                     placeholder="Enter password"
                             ></b-form-input>
                         </b-form-group>
-                        <b-form-group label="Inline radios (default)">
+                        <b-form-group label="select role">
                             <b-form-radio-group
                                     v-model="form.role"
                                     v-on:change="onChange($event)"
@@ -39,24 +38,24 @@
                                     placeholder="select role"
                             ></b-form-radio-group>
                         </b-form-group>
-                        <b-form-select
-                                v-if = "form.role !== null && form.role.role_name === 'teacher' "
-                                v-model="form.department_id"
-                                :options="departments">
-                        </b-form-select>
-                        <b-form-select
-                                v-if = "form.role !== null && form.role.role_name === 'student' "
-                                v-on:change="onChange($event)"
-                                v-model="form.course"
-                                :options="course">
-                        </b-form-select>
-                        <div class="test">
-                        <h4>hello</h4>
-                        <b-form-select
-                                v-if = "form.course !== null && form.role.role_name === 'student'"
-                                v-model="form.group_id"
-                                :options="groups">
-                        </b-form-select>
+                        <div class="form" v-if = "form.role !== null && form.role.role_name === 'teacher' ">
+                            <b-form-select
+                                    v-model="form.department_id"
+                                    :options="departments">
+                            </b-form-select>
+                        </div>
+                        <div class="form" v-if = "form.role !== null && form.role.role_name === 'student' ">
+                            <b-form-select
+                                    v-on:change="onChange($event)"
+                                    v-model="form.course"
+                                    :options="course">
+                            </b-form-select>
+                        </div>
+                        <div class="form" v-if = "form.course !== null && form.role.role_name === 'student'">
+                            <b-form-select
+                                    v-model="form.group_id"
+                                    :options="groups">
+                            </b-form-select>
                         </div>
                         <p>forgot password?</p>
                         <b-button type="submit" variant="primary" class="c-center">Submit</b-button>
@@ -112,18 +111,6 @@
                         console.log(error)
                     });
             },
-            getCourses(){
-                axios.get('http://backend.iitu.local/api/department/get-all')
-                    .then(response => {
-                        for (const department of response.data){
-                            if (response.data.length <= this.departments.length){ break }
-                            this.departments.push({text:department.name_en,value:department.id})
-                        }
-                    })
-                    .catch(function (error) {
-                        console.log(error)
-                    });
-            },
             getGroups(course){
                 axios.get('http://backend.iitu.local/api/group/get-all?course=' + course)
                     .then(response => {
@@ -139,18 +126,29 @@
             },
             onSubmit(evt) {
                 evt.preventDefault();
-
-                this.$store.dispatch('retrieveUser',{
-                    username: this.form.username,
-                    password: this.form.password
-                })
-                    .then(response => {
-                        console.log(response.data)
-                        if (response.data.roles[0].role === 'student'){
-                            this.$router.push({name:"Student",params:{id:response.data.roles[0].pivot.user_id}})
-                        }
-                        this.$router.push({name: "student",params:{id:response.data.id}})
-                    });
+                console.log(this.$store.getters.access_token)
+                if (this.$store.getters.access_token !== null){
+                    axios.post('http://backend.iitu.local/api/auth/register',{
+                            username:this.form.username,
+                            password:this.form.password,
+                            password_confirmation: this.form.password,
+                            role:this.form.role.role_name,
+                            group_id:this.form.group_id
+                        },
+                        {headers: {Authorization: "Bearer " + this.$store.getters.access_token}})
+                        .then(response => {
+                            if (response.status === 200){
+                                console.log(response.data)
+                            }
+                        })
+                        .catch((error) => {
+                            if (error.response.status === 401){
+                                this.$router.push({name: "Login"})
+                            }
+                        })
+                }else {
+                    this.$router.push({name:"Login"})
+                }
             },
             onChange(event){
                 if (event.role_name === 'teacher'){
@@ -160,7 +158,6 @@
                     this.getGroups(event)
                 }
             }
-
         },
         mounted() {
             axios.get('http://backend.iitu.local/api/user/get-roles')
@@ -172,6 +169,9 @@
                 .catch(function (error) {
                     console.log(error)
                 });
+        },
+        beforeMount() {
+
         }
     }
 </script>
@@ -202,9 +202,10 @@
     .c-center{
         text-align: center;
     }
-    .test{
+    .form{
         margin-top: 15px;
-        border: 1px solid red;
+        margin-bottom: 15px;
+        border: 2px solid red;
     }
 
 </style>
