@@ -8,8 +8,7 @@
                         <b-form-group
                                 id="input-group-1"
                                 label="Username"
-                                label-for="input-1"
-                        >
+                                label-for="input-1">
                             <b-form-input
                                     id="input-1"
                                     v-model="form.username"
@@ -19,7 +18,7 @@
                         </b-form-group>
                         <b-form-group
                                 id="input-group-2"
-                                label="Your Name:"
+                                label="Your Password:"
                                 label-for="input-2">
                             <b-form-input
                                     id="input-2"
@@ -43,6 +42,19 @@
                                     v-model="form.department_id"
                                     :options="departments">
                             </b-form-select>
+                        </div>
+                        <div class="form" v-if = "form.role !== null && form.role.role_name === 'teacher' ">
+                            <b-form-group
+                                    id="input-group-3"
+                                    label="Regalia"
+                                    label-for="input-3">
+                                <b-form-input
+                                        id="input-1"
+                                        v-model="form.regalia_en"
+                                        required
+                                        placeholder="Enter regalia"
+                                ></b-form-input>
+                            </b-form-group>
                         </div>
                         <div class="form" v-if = "form.role !== null && form.role.role_name === 'student' ">
                             <b-form-select
@@ -126,15 +138,26 @@
             },
             onSubmit(evt) {
                 evt.preventDefault();
-                console.log(this.$store.getters.access_token)
+                let data ={
+                    username:this.form.username,
+                    password:this.form.password,
+                    password_confirmation: this.form.password,
+                    role:this.form.role.role_name
+                }
+
+                if (this.form.role.role_name === 'student'){
+                    data.group_id = this.form.group_id
+                }
+
+                if (this.form.role.role_name === "teacher"){
+                    data.department_id = this.form.department_id,
+                    data.regalia = {regalia_en: this.form.regalia_en}
+                }
+
+                console.log(data)
+
                 if (this.$store.getters.access_token !== null){
-                    axios.post('http://backend.iitu.local/api/auth/register',{
-                            username:this.form.username,
-                            password:this.form.password,
-                            password_confirmation: this.form.password,
-                            role:this.form.role.role_name,
-                            group_id:this.form.group_id
-                        },
+                    axios.post('http://backend.iitu.local/api/auth/register',data,
                         {headers: {Authorization: "Bearer " + this.$store.getters.access_token}})
                         .then(response => {
                             if (response.status === 200){
@@ -145,6 +168,7 @@
                             if (error.response.status === 401){
                                 this.$router.push({name: "Login"})
                             }
+                            console.log(error)
                         })
                 }else {
                     this.$router.push({name:"Login"})
@@ -179,7 +203,6 @@
 <style scoped>
     .login-block{
         display: grid;
-        border: 2px solid red;
         width: 30%;
         /*height: 80vh;*/
 
@@ -205,7 +228,6 @@
     .form{
         margin-top: 15px;
         margin-bottom: 15px;
-        border: 2px solid red;
     }
 
 </style>
