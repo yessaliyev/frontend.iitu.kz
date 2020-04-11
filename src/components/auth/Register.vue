@@ -194,16 +194,13 @@
                     console.log(error)
                 });
         },
-        beforeMount() {
 
-        }
     }
 </script>
 
 <style scoped>
     .login-block{
         display: grid;
-        width: 30%;
         /*height: 80vh;*/
 
         /*margin-top: 8%;*/
@@ -213,8 +210,8 @@
     .login{
         /* border: 1px solid red; */
         /*max-width: 50%;*/
-        /*width: 30%;*/
-        padding: 55px;
+        width: 30vw;
+        padding: 45px;
         background-color: #353c48;
         color: beige;
         -webkit-box-shadow: 0px 3px 3px 1px rgba(0,0,0,0.19);
