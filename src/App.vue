@@ -10,7 +10,7 @@ html body{
 }
 #app {
   height: 100vh;
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: Avenir, Helvetica, Arial,sans-serif;
 }
 
 </style>

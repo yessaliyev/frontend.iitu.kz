@@ -67,7 +67,9 @@
                     if (response.data.roles[0].role === 'student'){
                         this.$router.push({name:"Student",params:{id:response.data.roles[0].pivot.user_id}})
                     }
-                    this.$router.push({name: "student",params:{id:response.data.id}})
+                    if (response.data.roles[0].role === 'admin'){
+                        this.$router.push({name: "Admin"})
+                    }
                 });
             }
         },

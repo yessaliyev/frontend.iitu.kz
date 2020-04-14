@@ -1,18 +1,24 @@
 <template>
     <div class="home-left-nav">
         <h4>Navigation</h4>
-        <b-nav vertical class="w-25">
-            <b-nav-item active>Active</b-nav-item>
-            <b-nav-item>Link</b-nav-item>
-            <b-nav-item>Another Link</b-nav-item>
-            <b-nav-item disabled>Disabled</b-nav-item>
+        <b-nav v-for="item of nav_items" :key="item.link" vertical class="w-25">
+            <b-nav-item active :href="item.link">{{item.text}}</b-nav-item>
         </b-nav>
     </div>
 </template>
 
 <script>
     export default {
-        name: "HomeLeftNav"
+        name: "HomeLeftNav",
+        data(){
+            return {
+                nav_items:[
+                    {text:'News',link:'/news'},
+                    {text:'Schedule',link:'/schedule'},
+                    {text:'Another Item',link:null},
+                ]
+            }
+        }
     }
 </script>
 
@@ -32,4 +38,5 @@
 .home-left-nav a:hover{
     color: wheat;
 }
+
 </style>

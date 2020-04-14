@@ -18,8 +18,8 @@
             <div v-if="logged_user.length !== 0" class="c-navbar-item ">
                 <div class="c-navbar-dropdown">
                     <b-dropdown right :text="logged_user.username">
-                        <b-dropdown-item :href="'/student/' +logged_user.id">My profile</b-dropdown-item>
-                        <b-dropdown-item href="#">My courses</b-dropdown-item>
+                        <b-dropdown-item href="#">My profile</b-dropdown-item>
+                        <b-dropdown-item :href="'/student/' +logged_user.id">My courses</b-dropdown-item>
                     </b-dropdown>
                 </div>
             </div>

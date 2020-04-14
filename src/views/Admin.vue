@@ -1,21 +1,28 @@
 <template>
     <div>
         <NavBar />
-        <div class="block">
-            <div class="block-1">
-                <Register />
+        <div class="main-block">
+            <div class="left-block-nav">
+                <home-left-nav />
+            </div>
+            <div class="comain-block">
+                <div class="comain-item">
+                    <Register />
+                </div>
             </div>
         </div>
     </div>
+
 </template>
 
 <script>
     import NavBar from "../components/navigation/NavBar";
     import Register from "../components/auth/Register";
+    import HomeLeftNav from "../components/navigation/HomeLeftNav";
     import axios from "axios";
     export default {
         name: "Admin",
-        components:{NavBar,Register},
+        components:{NavBar,Register,HomeLeftNav},
 
         beforeMount() {
             if (this.$store.getters.access_token !== null){
@@ -39,13 +46,16 @@
 </script>
 
 <style scoped>
-    .block{
-        border: 1px solid red;
+    .comain-block{
+        /*border: 1px solid red;*/
         display: grid;
         justify-content: space-around;
+
     }
-    .block-1{
-        border: 1px solid red;
-        place-self: center;
+    .comain-item{
+        margin-bottom: 15px;
+        margin-top: 15px;
+        /*border: 1px solid red;*/
     }
+
 </style>
