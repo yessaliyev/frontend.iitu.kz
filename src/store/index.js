@@ -14,16 +14,28 @@ export default new Vuex.Store({
 
   mutations: {
       setAccessToken(state,access_token){
-          this.state.access_token = access_token
+          state.access_token = access_token
       },
       setRefreshToken(state,refresh_token){
-          this.state.refresh_token = refresh_token
+          state.refresh_token = refresh_token
       },
       setUsername(state,username){
-          this.state.username = username
+          state.username = username
       },
       setUserId(state,user_id){
-          this.state.user_id = user_id
+          state.user_id = user_id
+      },
+      destroyAccessToken(state){
+          state.access_token = null
+      },
+      destroyRefreshToken(state){
+          state.refresh_token = null
+      },
+      destroyUsername(state){
+          state.username = null
+      },
+      destroyUserId(state){
+          state.user_id = null
       },
 
   },
@@ -66,23 +78,38 @@ export default new Vuex.Store({
                 });
         })
     },
-    logged_in(context,data){
-        return new Promise((resolve, reject) => {
-            axios.post('http://backend.iitu.local/api/auth/validate-token', {}, {headers: { Authorization: "Bearer " + data.token }})
-                .then(function (response) {
-                    const status = response.status
-                    if (status === 200) {
-                        localStorage.setItem('logged_in','true')
-                        context.commit('logged_in','true')
-                    }else{
-                        localStorage.setItem('logged_in','false')
-                        context.commit('logged_in','false')
-                    }
+    logout(context){
+        return new Promise((resolve,reject) => {
+            axios.post('http://backend.iitu.local/api/auth/logout', {}, {headers: { Authorization: "Bearer " + context.getters.access_token }})
+                .then((response) => {
+
+                    localStorage.removeItem('access_token')
+                    context.commit('destroyAccessToken')
+
+                    localStorage.removeItem('refresh_token')
+                    context.commit('destroyRefreshToken')
+
+                    localStorage.removeItem('username')
+                    context.commit("destroyUsername")
+
+                    localStorage.removeItem('user_id')
+                    context.commit('destroyUserId')
                     resolve(response)
+
                 })
-                .catch(function (error) {
-                    localStorage.setItem('logged_in','false')
-                    context.commit('logged_in','false')
+                .catch( (error) => {
+
+                    localStorage.removeItem('access_token')
+                    context.commit('destroyAccessToken')
+
+                    localStorage.removeItem('refresh_token')
+                    context.commit('destroyRefreshToken')
+
+                    localStorage.removeItem('username')
+                    context.commit("destroyUsername")
+
+                    localStorage.removeItem('user_id')
+                    context.commit('destroyUserId')
                     reject(error)
                 });
         })

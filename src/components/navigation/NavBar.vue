@@ -20,6 +20,7 @@
                     <b-dropdown right :text="logged_user.username">
                         <b-dropdown-item href="#">My profile</b-dropdown-item>
                         <b-dropdown-item :href="'/student/' +logged_user.id">My courses</b-dropdown-item>
+                        <b-dropdown-item @click="logout">logout</b-dropdown-item>
                     </b-dropdown>
                 </div>
             </div>
@@ -37,7 +38,7 @@
                 logged_user:[]
             }
         },
-        beforeMount(){
+        beforeCreate(){
             if (this.$store.getters.access_token !== null){
                 axios.get('http://backend.iitu.local/api/user/get',
                     {headers: {Authorization: "Bearer " + this.$store.getters.access_token}})
@@ -49,8 +50,16 @@
                         console.log(e)
                     })
             }
+        },
+        methods:{
+            logout(){
+                this.$store.dispatch('logout')
+                    .then(response => {
+                        console.log(response.data)
+                        this.$router.push({name: "Home"})
+                    });
+            }
         }
-
     }
 </script>
 
