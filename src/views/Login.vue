@@ -64,11 +64,16 @@
                 })
                 .then(response => {
                     console.log(response.data)
-                    if (response.data.roles[0].role === 'student'){
-                        this.$router.push({name:"Student",params:{id:response.data.roles[0].pivot.user_id}})
-                    }
-                    if (response.data.roles[0].role === 'admin'){
-                        this.$router.push({name: "Admin"})
+                    switch (response.data.roles[0].role) {
+                        case 'student':
+                            this.$router.push({name:"Student",params:{id:response.data.roles[0].pivot.user_id}})
+                            break;
+                        case 'admin':
+                            this.$router.push({name: "Admin"})
+                            break
+                        case 'teacher':
+                            this.$router.push({name:"Teacher",params:{id:response.data.roles[0].pivot.user_id}})
+                            break
                     }
                 });
             }

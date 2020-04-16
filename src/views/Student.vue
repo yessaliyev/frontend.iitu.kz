@@ -29,7 +29,7 @@
             id:this.$route.params.id
             }
         },
-        beforeMount() {
+        beforeCreate() {
             if (this.$store.getters.access_token !== null){
                 axios.get('http://backend.iitu.local/api/user/get',
                     {headers: {Authorization: "Bearer " + this.$store.getters.access_token}})

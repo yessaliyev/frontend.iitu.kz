@@ -3,10 +3,16 @@
     <NavBar />
     <div class="main-block">
       <div class="left-block-nav">
-        <home-left-nav />
+        <div class="first-nav">
+          <home-left-nav />
+        </div>
+        <div class="second-nav">
+          <left-static-nav />
+        </div>
       </div>
       <div class="main-block-items">
         <div class="main-block-item">
+          <h3>News</h3>
           <news />
         </div>
       </div>
@@ -18,12 +24,14 @@
   import NavBar from "../components/navigation/NavBar";
   import HomeLeftNav from "../components/navigation/HomeLeftNav";
   import News from "../components/news/News";
+  import LeftStaticNav from "../components/navigation/LeftStaticNav";
 
 export default {
   name: 'Home',
   components: {
     NavBar,
     HomeLeftNav,
+    LeftStaticNav,
     News
   }
 }
@@ -46,8 +54,18 @@ export default {
   .main-block-items{
     display: grid;
     grid-template-columns: 1fr;
+    /*background-color: #353c48;*/
+    margin-right: 2%;
   }
   .main-block-item{
+    color: white;
+  }
+
+  .first-nav{
+    margin-bottom: 10%;
+  }
+
+  .second-nav{
 
   }
 </style>

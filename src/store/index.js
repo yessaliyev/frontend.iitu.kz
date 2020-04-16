@@ -10,6 +10,7 @@ export default new Vuex.Store({
       refresh_token:localStorage.getItem('refresh_token')||null,
       username:localStorage.getItem('username')||null,
       user_id:localStorage.getItem('user_id')||null,
+      user_role:localStorage.getItem('user_role')||null,
   },
 
   mutations: {
@@ -24,6 +25,9 @@ export default new Vuex.Store({
       },
       setUserId(state,user_id){
           state.user_id = user_id
+      },
+      setUserRole(state,user_role){
+          state.user_role = user_role
       },
       destroyAccessToken(state){
           state.access_token = null
@@ -43,6 +47,18 @@ export default new Vuex.Store({
       access_token(state){
           return state.access_token
       },
+      refresh_token(state){
+          return state.refresh_token
+      },
+      user_id(state){
+          return state.user_id
+      },
+      user_name(state){
+          return state.user_name
+      },
+      user_role(state){
+          return state.user_role
+      }
 
   },
   actions: {
@@ -57,6 +73,7 @@ export default new Vuex.Store({
                     const refresh_token = response.data.refresh_token
                     const username = response.data.username
                     const user_id = response.data.user_id
+                    const user_role = response.data.roles[0].role
 
                     localStorage.setItem('access_token',access_token)
                     context.commit('setAccessToken',access_token)
@@ -69,6 +86,9 @@ export default new Vuex.Store({
 
                     localStorage.setItem('user_id',user_id)
                     context.commit('setUserId',user_id)
+
+                    localStorage.setItem('user_role',user_role)
+                    context.commit('setUserRole',user_role)
 
                     resolve(response)
                 })

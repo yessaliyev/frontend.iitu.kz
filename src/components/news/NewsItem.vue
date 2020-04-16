@@ -25,7 +25,7 @@
         box-shadow: 0px 0px 3px 1px rgba(0,0,0,0.19);
         padding: 20px;
         margin-bottom: 25px;
-        width: 93%;
+        /*margin: 1%;*/
     }
 
     .item:hover{

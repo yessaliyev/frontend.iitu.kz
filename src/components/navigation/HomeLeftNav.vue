@@ -1,7 +1,7 @@
 <template>
     <div class="home-left-nav">
         <h4>Navigation</h4>
-        <b-nav v-for="item of nav_items" :key="item.link" vertical class="w-25">
+        <b-nav v-for="item of nav_items" :key="item.link" vertical>
             <b-nav-item active :href="item.link">{{item.text}}</b-nav-item>
         </b-nav>
     </div>
@@ -17,6 +17,21 @@
                     {text:'Schedule',link:'/schedule'},
                     {text:'Another Item',link:null},
                 ]
+            }
+        },
+        beforeMount() {
+            if (this.$store.getters.access_token !== null){
+                switch (this.$store.getters.user_role) {
+                    case 'admin':
+                        console.log('rest')
+                        this.nav_items = [
+                            {text:'Activities',link:'/admin'},
+                            {text:'Schedule',link:'/schedule'},
+                            {text:'Teachers',link:'/admin/teachers'},
+                            {text:'Students',link:'/admin/students'},
+                        ]
+                        break
+                }
             }
         }
     }
