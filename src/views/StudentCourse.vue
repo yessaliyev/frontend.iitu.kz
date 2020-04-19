@@ -10,7 +10,7 @@
           <left-static-nav />
         </div>
       </div>
-      <div class="main-block-items">
+      <div class="main-block-items border">
         <div class="course-nav">
           <h4>test Title</h4>
           <div class="course-nav-items">
@@ -19,6 +19,9 @@
                v-bind:item="item"
             />
           </div>
+        </div>
+        <div class="weeks">
+          <weeks v-bind:role=" this.$store.getters.user_role " />
         </div>
       </div>
     </div>
@@ -30,8 +33,8 @@
   import HomeLeftNav from "../components/navigation/HomeLeftNav";
   import LeftStaticNav from "../components/navigation/LeftStaticNav";
   import VerticalNavItem from "../components/navigation/VerticalNavItem";
-  import auth from "../components/mixins/auth";
-  import axios from "axios";
+
+  import Weeks from "../components/course/Weeks";
 
 export default {
   name: 'StudentCourse',
@@ -39,35 +42,17 @@ export default {
     NavBar,
     HomeLeftNav,
     LeftStaticNav,
-    VerticalNavItem
+    VerticalNavItem,
+    Weeks
   },
-  mixins:[auth],
   data(){
     return{
       subject_nav:[
         {id:0,text:'Announcements',link:'#'},
         {id:1,text:'Materials',link:'#'},
         {id:2,text:'Attendance',link:'#'},
-      ],
-      weeks:[]
+      ]
     }
-  },
-  beforeMount() {
-    this.check('student').then(() =>{
-      axios.get('http://backend.iitu.local/api/subject/get-weeks',
-          {headers: {Authorization: "Bearer " + this.$store.getters.access_token}})
-          .then((response)=> {
-              this.weeks = response.data
-              console.log(this.weeks)
-          })
-          .catch(() => {
-              return false
-          })
-    })
-    .catch((e) => {
-      console.log(e)
-      this.$router.push({name:"Home"})
-    });
   }
 
 }
