@@ -43,7 +43,6 @@
                 axios.get('http://backend.iitu.local/api/user/get',
                     {headers: {Authorization: "Bearer " + this.$store.getters.access_token}})
                     .then(response => {
-                        console.log(response.data)
                         this.logged_user = response.data
                     })
                     .catch(function (e) {

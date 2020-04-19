@@ -1,14 +1,16 @@
 <template>
-    <div class="home-left-static-nav">
+    <div class="main">
         <h4>Static navigation</h4>
-        <b-nav  vertical>
-            <b-nav-item active href="#">Вопросы-ответы по ДО</b-nav-item>
-            <b-nav-item active href="#">Вопросы-ответы по ДО</b-nav-item>
-            <b-nav-item active href="#">Вопросы-ответы по ДО</b-nav-item>
-            <b-nav-item active href="#">Вопросы-ответы по ДО</b-nav-item>
-            <b-nav-item active href="#">Вопросы-ответы по ДО</b-nav-item>
-            <b-nav-item active href="#">Вопросы-ответы по ДО</b-nav-item>
-        </b-nav>
+            <div class="home-left-static-nav">
+                <b-nav  vertical>
+                    <b-nav-item active href="#">Вопросы-ответы по ДО</b-nav-item>
+                    <b-nav-item active href="#">Вопросы-ответы по ДО</b-nav-item>
+                    <b-nav-item active href="#">Вопросы-ответы по ДО</b-nav-item>
+                    <b-nav-item active href="#">Вопросы-ответы по ДО</b-nav-item>
+                    <b-nav-item active href="#">Вопросы-ответы по ДО</b-nav-item>
+                    <b-nav-item active href="#">Вопросы-ответы по ДО</b-nav-item>
+                </b-nav>
+        </div>
     </div>
 </template>
 
@@ -20,6 +22,9 @@
 
 <style scoped>
 
+    .main{
+        color: white;
+    }
     .home-left-static-nav{
         color: white;
         background-color: #353c48;

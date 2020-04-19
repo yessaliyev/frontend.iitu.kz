@@ -4,6 +4,8 @@ import Home from '../views/Home.vue'
 import Student from "../views/Student";
 import Teacher from "../views/Teacher";
 import Admin from "../views/Admin";
+import StudentCourse from "../views/StudentCourse";
+import Login from "../views/Login";
 
 Vue.use(VueRouter)
 
@@ -24,8 +26,7 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-
-    component: () => import('../views/Login.vue')
+    component:Login
   },
   {
     path:'/student/:id',
@@ -41,6 +42,11 @@ const routes = [
     path:'/admin',
     name:'Admin',
     component: Admin
+  },
+  {
+    path:'/student/course/:id',
+    name:'StudentCourse',
+    component:StudentCourse
   }
 ]
 

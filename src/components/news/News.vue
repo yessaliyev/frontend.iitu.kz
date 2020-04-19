@@ -21,9 +21,6 @@
         mounted(){
             axios.get('http://backend.iitu.local/api/news/get')
                 .then(response => {
-                    console.log(response.data)
-                    console.log(this.$router.currentRoute)
-
                     this.news = response.data
                 })
                 .catch(function (error) {

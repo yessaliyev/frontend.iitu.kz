@@ -1,5 +1,6 @@
 <template>
-    <div class="courses">
+    <div class="courses ">
+        <h5>My Courses</h5>
         <CourseItem
             v-for="item in courses" :key="item.id"
             v-bind:item="item"
@@ -19,7 +20,7 @@
             }
         },
         mounted(){
-            axios.get('http://backend.iitu.local/api/subject/get?user_id',
+            axios.get('http://backend.iitu.local/api/subject/get',
                 {headers: {Authorization: "Bearer " + this.$store.getters.access_token}})
                 .then(response => {
                     this.courses = response.data

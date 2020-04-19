@@ -12,8 +12,10 @@
       </div>
       <div class="main-block-items">
         <div class="main-block-item">
-          <h3>News</h3>
-          <news />
+          <div class="test">
+            <h4>News</h4>
+            <news />
+          </div>
         </div>
       </div>
     </div>
@@ -52,8 +54,8 @@ export default {
   }
 
   .main-block-items{
-    display: grid;
-    grid-template-columns: 1fr;
+    /*display: grid;*/
+    /*grid-template-columns: 1fr;*/
     /*background-color: #353c48;*/
     margin-right: 2%;
   }

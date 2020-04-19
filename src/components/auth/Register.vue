@@ -126,9 +126,7 @@
             getGroups(course){
                 axios.get('http://backend.iitu.local/api/group/get-all?course=' + course)
                     .then(response => {
-                        console.log(response.data)
                         for (const group of response.data){
-                            console.log({text:group.name_en,value:group.id})
                             this.groups.push({text:group.name_en,value:group.id})
                         }
                     })
