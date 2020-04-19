@@ -1,9 +1,12 @@
 <template>
-    <div>
-        <WeekItem
-            v-for="item in weeks" :key="item.id"
-            v-bind:item="item"
-        />
+    <div class="">
+        <h4>Weeks</h4>
+        <div class="weeks">
+            <WeekItem
+                v-for="item in weeks" :key="item.id"
+                v-bind:item="item"
+            />
+        </div>
     </div>
 </template>
 
@@ -43,5 +46,10 @@
 </script>
 
 <style scoped>
-
+    .weeks{
+        background-color: #353c48;
+        -webkit-box-shadow: 0px 0px 3px 1px rgba(0,0,0,0.19);
+        -moz-box-shadow: 0px 0px 3px 1px rgba(0,0,0,0.19);
+        box-shadow: 0px 0px 3px 1px rgba(0,0,0,0.19);
+    }
 </style>

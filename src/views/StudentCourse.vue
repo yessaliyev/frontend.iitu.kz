@@ -10,7 +10,7 @@
           <left-static-nav />
         </div>
       </div>
-      <div class="main-block-items border">
+      <div class="main-block-items">
         <div class="course-nav">
           <h4>test Title</h4>
           <div class="course-nav-items">
@@ -63,10 +63,15 @@ export default {
   }
   .course-nav-items{
     color: white;
-        background-color: #353c48;
-        /*padding: 10px;*/
-        -webkit-box-shadow: 0px 0px 3px 1px rgba(0,0,0,0.19);
-        -moz-box-shadow: 0px 0px 3px 1px rgba(0,0,0,0.19);
-        box-shadow: 0px 0px 3px 1px rgba(0,0,0,0.19);
+    background-color: #353c48;
+    /*padding: 10px;*/
+    -webkit-box-shadow: 0px 0px 3px 1px rgba(0,0,0,0.19);
+    -moz-box-shadow: 0px 0px 3px 1px rgba(0,0,0,0.19);
+    box-shadow: 0px 0px 3px 1px rgba(0,0,0,0.19);
+    margin-bottom: 2%;
+
+  }
+  .weeks{
+    color: white;
   }
 </style>
