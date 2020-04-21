@@ -4,8 +4,12 @@ import Home from '../views/Home.vue'
 import Student from "../views/Student";
 import Teacher from "../views/Teacher";
 import Admin from "../views/Admin";
-import StudentCourse from "../views/StudentCourse";
 import Login from "../views/Login";
+import TeacherCourse from "../views/TeacherCourse";
+import Attendance from "../views/Attendance";
+import Course from "../views/Course";
+import auth from "../components/mixins/auth";
+import store from "../store/index";
 
 Vue.use(VueRouter)
 
@@ -16,37 +20,70 @@ const routes = [
     component: Home
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  },
-  {
     path: '/login',
     name: 'Login',
     component:Login
   },
   {
-    path:'/student/:id',
+    path:'/student',
     name:'Student',
-    component: Student
+    component: Student,
+    beforeEnter(to, from, next) {
+       auth.methods.check('student')
+           .then(()=>{
+             next()
+           })
+           .catch(()=>{
+             next({name:"Home"})
+           })
+    }
   },
   {
-    path:'/teacher/:id',
+    path:'/teacher',
     name:'Teacher',
-    component: Teacher
+    component: Teacher,
+    beforeEnter(to, from, next) {
+       auth.methods.check('teacher')
+           .then(()=>{
+             next()
+           })
+           .catch((e)=>{
+             console.log(e)
+             next({name:"Home"})
+           })
+    }
+
   },
+
   {
     path:'/admin',
     name:'Admin',
     component: Admin
   },
   {
-    path:'/student/course/:id',
-    name:'StudentCourse',
-    component:StudentCourse
+    path:'/course/:id',
+    name:'Course',
+    component:Course,
+    beforeEnter(to, from, next) {
+       auth.methods.check(store.getters.user_role,true)
+           .then(()=>{
+             next()
+           })
+           .catch((e)=>{
+             console.log(e)
+             next({name:"Login"})
+           })
+    }
+  },
+  {
+    path:'/teacher/course/:id',
+    name:'TeacherCourse',
+    component:TeacherCourse
+  },
+  {
+    path:'/attendance',
+    name:'Attendance',
+    component:Attendance
   }
 ]
 

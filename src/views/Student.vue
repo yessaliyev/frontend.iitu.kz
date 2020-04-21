@@ -24,11 +24,6 @@
     export default {
         name: "Student",
         components: {Courses,HomeLeftNav,NavBar},
-        data() {
-            return {
-            id:this.$route.params.id
-            }
-        },
         beforeCreate() {
             if (this.$store.getters.access_token !== null){
                 axios.get('http://backend.iitu.local/api/user/get',

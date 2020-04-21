@@ -19,7 +19,8 @@
                 <div class="c-navbar-dropdown">
                     <b-dropdown right :text="logged_user.username">
                         <b-dropdown-item href="#">My profile</b-dropdown-item>
-                        <b-dropdown-item :href="'/student/' +logged_user.id">My courses</b-dropdown-item>
+                        <b-dropdown-item v-if="$store.getters.user_role === 'student' " :href="'/student/'">My courses</b-dropdown-item>
+                        <b-dropdown-item v-if="$store.getters.user_role === 'teacher' " :href="'/teacher/'">My courses</b-dropdown-item>
                         <b-dropdown-item @click="logout">logout</b-dropdown-item>
                     </b-dropdown>
                 </div>

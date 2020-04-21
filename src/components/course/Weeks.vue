@@ -26,21 +26,17 @@
             }
         },
         beforeMount() {
-            this.check(this.role).then(() =>{
-                axios.get('http://backend.iitu.local/api/subject/get-weeks',
-                  {headers: {Authorization: "Bearer " + this.$store.getters.access_token}})
-                  .then((response)=> {
-                      this.weeks = response.data
-                      console.log(this.weeks)
-                  })
-                  .catch(() => {
-                      return false
-                  })
-             })
-            .catch((e) => {
-              console.log(e)
-              this.$router.push({name:"Home"})
-            });
+            const url = this.role === 'student' ? 'get-student-weeks' : 'get-teacher-weeks'
+
+            axios.get('http://backend.iitu.local/api/subject/' + url,
+                {headers: {Authorization: "Bearer " + this.$store.getters.access_token}})
+                .then((response) => {
+                    this.weeks = response.data
+                    console.log(this.weeks)
+                })
+                .catch(() => {
+                    return false
+                })
         }
     }
 </script>

@@ -21,7 +21,7 @@
           </div>
         </div>
         <div class="weeks">
-          <weeks v-bind:role=" this.$store.getters.user_role " />
+          <weeks v-bind:role=" 'teacher' " />
         </div>
       </div>
     </div>
@@ -37,7 +37,7 @@
   import Weeks from "../components/course/Weeks";
 
 export default {
-  name: 'StudentCourse',
+  name: 'TeacherCourse',
   components: {
     NavBar,
     HomeLeftNav,

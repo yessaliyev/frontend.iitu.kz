@@ -1,7 +1,7 @@
 <template>
     <div class="item ">
         <div class="">
-            <a :href=" '/student/course/' + item.id">{{item.name_en}}</a>
+            <a :href=" '/course/' + item.id">{{item.name_en}}</a>
         </div>
     </div>
 </template>

@@ -66,13 +66,15 @@
                     console.log(response.data)
                     switch (response.data.roles[0].role) {
                         case 'student':
-                            this.$router.push({name:"Student",params:{id:response.data.roles[0].pivot.user_id}})
+                            //,params:{id:response.data.roles[0].pivot.user_id}
+                            this.$router.push({name:"Student"})
                             break;
                         case 'admin':
                             this.$router.push({name: "Admin"})
                             break
                         case 'teacher':
-                            this.$router.push({name:"Teacher",params:{id:response.data.roles[0].pivot.user_id}})
+                            //,params:{id:response.data.roles[0].pivot.user_id}
+                            this.$router.push({name:"Teacher"})
                             break
                     }
                 });
