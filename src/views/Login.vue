@@ -64,7 +64,7 @@
                 })
                 .then(response => {
                     console.log(response.data)
-                    switch (response.data.roles[0].role) {
+                    switch (response.data.role.role) {
                         case 'student':
                             //,params:{id:response.data.roles[0].pivot.user_id}
                             this.$router.push({name:"Student"})

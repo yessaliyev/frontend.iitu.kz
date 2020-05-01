@@ -29,7 +29,7 @@
                 axios.get('http://backend.iitu.local/api/user/get',
                     {headers: {Authorization: "Bearer " + this.$store.getters.access_token}})
                     .then(response => {
-                        if (response.data.roles[0].role !== 'admin' && response.data.roles[0].role !== 'student'){
+                        if (response.data.role.role !== 'admin' && response.data.role.role !== 'student'){
                             this.$router.push({name: "Home"})
                         }
                     })

@@ -73,7 +73,7 @@ export default new Vuex.Store({
                     const refresh_token = response.data.refresh_token
                     const username = response.data.username
                     const user_id = response.data.user_id
-                    const user_role = response.data.roles[0].role
+                    const user_role = response.data.role.role
 
                     localStorage.setItem('access_token',access_token)
                     context.commit('setAccessToken',access_token)

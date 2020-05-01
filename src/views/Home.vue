@@ -56,7 +56,7 @@ export default {
   .main-block-items{
     /*display: grid;*/
     /*grid-template-columns: 1fr;*/
-    /*background-color: #353c48;*/
+    background-color: #353c48;
     margin-right: 2%;
   }
   .main-block-item{

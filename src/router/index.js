@@ -83,7 +83,17 @@ const routes = [
   {
     path:'/attendance',
     name:'Attendance',
-    component:Attendance
+    component:Attendance,
+    beforeEnter(to, from, next) {
+       auth.methods.check(store.getters.user_role,true)
+           .then(()=>{
+             next()
+           })
+           .catch((e)=>{
+             console.log(e)
+             next({name:"Login"})
+           })
+    }
   }
 ]
 

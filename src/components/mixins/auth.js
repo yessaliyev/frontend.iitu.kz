@@ -3,6 +3,11 @@ import store from "../../store/index"
 
 export default {
     methods:{
+        /*
+        * Принемает на вход role, is_auth[optional]
+        * если указан is_auth true то проверяет только
+        * аутентификацию пользователя
+        * */
         check(role,is_auth = false){
             return new Promise(((resolve, reject) => {
                 if (store.getters.access_token !== null){
@@ -13,15 +18,13 @@ export default {
                         //это чисто для того чтобы узнать проверить аутентифицирован ли пользователь
                         if (is_auth) resolve(true)
 
-                        if (role !== null && role === response.data.roles[0].role){
-                            console.log([response.data.roles[0]],role)
+                        if (role !== null && role === response.data.role.role){
                             resolve(response.data)
                         }
                         reject(response.data)
                     })
                     .catch((error) => {
-                        console.log(error)
-                        reject(false)
+                        reject(error)
                     })
                 }else {
                     reject(false)
