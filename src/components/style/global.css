@@ -19,3 +19,12 @@
 .white-link a:hover{
     color: wheat !important;
 }
+
+.dark-table{
+    background-color: #353c48 !important
+}
+
+.dark-table tbody tr:hover{
+    background-color: #444c58;
+    color: white;
+}
