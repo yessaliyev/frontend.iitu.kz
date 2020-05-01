@@ -32,7 +32,6 @@
                 {headers: {Authorization: "Bearer " + this.$store.getters.access_token}})
                 .then((response) => {
                     this.weeks = response.data
-                    console.log(this.weeks)
                 })
                 .catch(() => {
                     return false

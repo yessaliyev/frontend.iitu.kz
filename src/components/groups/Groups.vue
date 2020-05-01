@@ -21,7 +21,7 @@
             }
         },
         mounted(){
-            axios.get('http://backend.iitu.local/api/news/get')
+            axios.get('http://backend.iitu.local/api/group/get-by-subject?subject_id')
                 .then(response => {
                     this.news = response.data
                 })

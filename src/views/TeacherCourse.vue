@@ -65,10 +65,10 @@ export default {
     color: white;
     background-color: #353c48;
     /*padding: 10px;*/
-    -webkit-box-shadow: 0px 0px 3px 1px rgba(0,0,0,0.19);
-    -moz-box-shadow: 0px 0px 3px 1px rgba(0,0,0,0.19);
-    box-shadow: 0px 0px 3px 1px rgba(0,0,0,0.19);
-    margin-bottom: 2%;
+    /*-webkit-box-shadow: 0px 0px 3px 1px rgba(0,0,0,0.19);*/
+    /*-moz-box-shadow: 0px 0px 3px 1px rgba(0,0,0,0.19);*/
+    /*box-shadow: 0px 0px 3px 1px rgba(0,0,0,0.19);*/
+    /*margin-bottom: 2%;*/
 
   }
   .weeks{

@@ -42,19 +42,3 @@
         }
     }
 </script>
-
-<style>
-
-    .test{
-        background: #353c48;
-    }
-
-    .test1{
-        background-color: #a71116 !important;
-    }
-    .test1:active{
-        background-color: red;
-
-    }
-
-</style>

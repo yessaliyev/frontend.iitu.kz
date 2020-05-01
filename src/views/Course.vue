@@ -38,6 +38,7 @@
 
 export default {
   name: 'Course',
+  props:['subject_id'],
   components: {
     NavBar,
     HomeLeftNav,
@@ -50,9 +51,13 @@ export default {
       subject_nav:[
         {id:0,text:'Announcements',link:'#'},
         {id:1,text:'Materials',link:'#'},
-        {id:2,text:'Attendance',link:'/attendance'},
+        {id:2,text:'Attendance',link:'/attendance/' + this.$route.params.subject_id},
       ]
     }
+  },
+
+  mounted() {
+    console.log(this.$route.params)
   }
 
 }

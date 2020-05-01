@@ -61,7 +61,7 @@ const routes = [
     component: Admin
   },
   {
-    path:'/course/:id',
+    path:'/course/:subject_id',
     name:'Course',
     component:Course,
     beforeEnter(to, from, next) {
@@ -81,7 +81,7 @@ const routes = [
     component:TeacherCourse
   },
   {
-    path:'/attendance',
+    path:'/attendance/:subject_id',
     name:'Attendance',
     component:Attendance,
     beforeEnter(to, from, next) {
