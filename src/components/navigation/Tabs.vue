@@ -2,10 +2,10 @@
     <div class="">
         <div class="tabs">
             <b-tabs content-class="mt-3" active-nav-item-class="dark-back white-text" class="white-link">
-                <b-tab title="First" >
+                <b-tab title="Lessons" >
                     <Groups />
                 </b-tab>
-                <b-tab title="Second">
+                <b-tab title="Add lesson">
                     <Table />
                 </b-tab>
                 <b-tab title="Disabled">

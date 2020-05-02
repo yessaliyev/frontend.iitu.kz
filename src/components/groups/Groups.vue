@@ -23,9 +23,9 @@
 <!--      <template v-slot:cell(date)="row">-->
 <!--      </template>-->
 
-      <template v-slot:cell(actions)>
+      <template v-slot:cell(actions)="row">
         <div class="h5 mb-0">
-          <router-link :to="{ name: 'Course'}"><b-icon-forward-fill /></router-link>
+          <router-link :to="{ name: 'GroupAttendance',params: { group_id: row.item.id }}"><b-icon-forward-fill /></router-link>
           <router-link :to="{ name: 'Course'}"><b-icon-gear-fill /></router-link>
           <router-link :to="{ name: 'Course'}"><b-icon-x-circle-fill /></router-link>
         </div>
