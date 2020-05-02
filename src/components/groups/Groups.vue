@@ -1,5 +1,6 @@
 <template>
   <b-container fluid class="table">
+
     <b-table
       show-empty
       stacked="md"
@@ -22,13 +23,12 @@
 <!--      <template v-slot:cell(date)="row">-->
 <!--      </template>-->
 
-      <template v-slot:cell(actions)="row">
-        <b-button size="sm" @click="info(row.item, row.index, $event.target)" class="mr-1">
-          Info modal
-        </b-button>
-        <b-button size="sm" @click="row.toggleDetails">
-          {{ row.detailsShowing ? 'Hide' : 'Show' }} Details
-        </b-button>
+      <template v-slot:cell(actions)>
+        <div class="h5 mb-0">
+          <router-link :to="{ name: 'Course'}"><b-icon-forward-fill /></router-link>
+          <router-link :to="{ name: 'Course'}"><b-icon-gear-fill /></router-link>
+          <router-link :to="{ name: 'Course'}"><b-icon-x-circle-fill /></router-link>
+        </div>
       </template>
 
       <template v-slot:row-details="row">
