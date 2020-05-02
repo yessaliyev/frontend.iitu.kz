@@ -10,8 +10,8 @@
                     <left-static-nav />
                 </div>
             </div>
-            <div>
-              <h4>qwe</h4>
+            <div class="lessons">
+              <h4>Lessons</h4>
               <div class="main-block-items">
                   <tabs />
               </div>
@@ -42,3 +42,10 @@
         }
     }
 </script>
+
+
+<style scoped>
+    .lessons{
+        color: white;
+    }
+</style>

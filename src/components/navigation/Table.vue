@@ -16,11 +16,10 @@
       striped borderless
       class="dark-table"
     >
-<!--      <template v-slot:cell(name_en)="row">-->
-<!--      </template>-->
+      <template v-slot:cell(name)="row">
+      {{ row.value.first }} {{ row.value.last }}
+      </template>
 
-<!--      <template v-slot:cell(date)="row">-->
-<!--      </template>-->
 
       <template v-slot:cell(actions)="row">
         <b-button size="sm" @click="info(row.item, row.index, $event.target)" class="mr-1">
@@ -82,23 +81,38 @@
 </template>
 
 <script>
-  import axios from "axios"
   export default {
-  name:"Groups",
+  name:"Table",
     data() {
       return {
-        items: [],
+        items: [
+          { isActive: true, age: 40, name: { first: 'Dickerson', last: 'Macdonald' } },
+          { isActive: false, age: 21, name: { first: 'Larsen', last: 'Shaw' } },
+          { isActive: false, age: 26, name: { first: 'Mitzi', last: 'Navarro' } },
+          { isActive: false, age: 22, name: { first: 'Genevieve', last: 'Wilson' } },
+          { isActive: true, age: 38, name: { first: 'John', last: 'Carney' } },
+          { isActive: false, age: 29, name: { first: 'Dick', last: 'Dunlap' } }
+        ],
         fields: [
-          { key: 'group', label: 'Group', sortable: true, sortDirection: 'desc' },
-          { key: 'date', label: 'Date', sortable: true, class: 'text-center' },
-          { key: 'type', label: 'Type', sortable: true, class: 'text-center' },
-          { key: 'room', label: 'Room', sortable: true, class: 'text-center' },
-          { key: 'actions', label: 'Actions' },
+          { key: 'name', label: 'Person Full name', sortable: true, sortDirection: 'desc' },
+          { key: 'age', label: 'Person age', sortable: true, class: 'text-center' },
+          {
+            key: 'isActive',
+            label: 'is Active',
+              // eslint-disable-next-line no-unused-vars
+            formatter: (value, key, item) => {
+              return value ? 'Yes' : 'No'
+            },
+            sortable: true,
+            sortByFormatted: true,
+            filterByFormatted: true
+          },
+          { key: 'actions', label: 'Actions' }
         ],
         totalRows: 1,
         currentPage: 1,
-        perPage: 1,
-        pageOptions: [1, 10, 15],
+        perPage: 5,
+        pageOptions: [5, 10, 15],
         sortBy: '',
         sortDesc: false,
         sortDirection: 'asc',
@@ -123,28 +137,7 @@
     },
     mounted() {
       // Set the initial number of items
-
-
-      axios.get('http://backend.iitu.local/api/attendance/get-course-attendance',
-              {headers: {Authorization: "Bearer " + this.$store.getters.access_token}})
-               .then(response => {
-                   for (const group of response.data){
-                           this.items.push({
-                               id:group.id,
-                               group:group.name_en,
-                               date:group.date,
-                               type:group.type_en,
-                               room:group.room_num
-                           })
-                       }
-                   this.totalRows = this.items.length
-               })
-               .catch(function (error) {
-                   console.log(error)
-               });
-
-
-
+      this.totalRows = this.items.length
     },
     methods: {
       info(item, index, button) {
@@ -175,57 +168,3 @@
         background-color: #353c48;
     }
 </style>
-
-
-<!--<template>-->
-<!--    <div>-->
-<!--        <div class="table ">-->
-<!--             <b-table striped borderless hover :items="groups" :fields="fields" class="dark-table">-->
-
-<!--             </b-table>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</template>-->
-
-<!--<script>-->
-<!--    import axios from "axios";-->
-
-<!--    export default {-->
-<!--        name: "Groups",-->
-<!--        data(){-->
-<!--            return{-->
-<!--                fields:[],-->
-<!--                groups: [-->
-
-<!--                ]-->
-<!--            }-->
-<!--        },-->
-<!--        mounted(){-->
-<!--            axios.get('http://backend.iitu.local/api/attendance/get-course-attendance',-->
-<!--               {headers: {Authorization: "Bearer " + this.$store.getters.access_token}})-->
-<!--                .then(response => {-->
-<!--                    for (const group of response.data){-->
-<!--                            this.groups.push({-->
-<!--                                id:group.id,-->
-<!--                                Group:group.name_en,-->
-<!--                                Date:group.date,-->
-<!--                                Type:group.type_en,-->
-<!--                                room:group.room_num-->
-<!--                            })-->
-<!--                        }-->
-<!--                })-->
-<!--                .catch(function (error) {-->
-<!--                    console.log(error)-->
-<!--                });-->
-<!--        }-->
-<!--    }-->
-<!--</script>-->
-
-<!--<style scoped>-->
-
-<!--    .table{-->
-<!--        color: white;-->
-<!--        background-color: #353c48;-->
-<!--    }-->
-
-<!--</style>-->

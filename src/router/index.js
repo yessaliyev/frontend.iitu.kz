@@ -10,6 +10,7 @@ import Attendance from "../views/Attendance";
 import Course from "../views/Course";
 import auth from "../components/mixins/auth";
 import store from "../store/index";
+import GroupAttendance from "../views/GroupAttendance";
 
 Vue.use(VueRouter)
 
@@ -81,6 +82,11 @@ const routes = [
     component:TeacherCourse
   },
   {
+    path:'/attendance/group/:group_id',
+    name:'GroupAttendance',
+    component:GroupAttendance
+  },
+  {
     path:'/attendance/:subject_id',
     name:'Attendance',
     component:Attendance,
@@ -94,7 +100,7 @@ const routes = [
              next({name:"Login"})
            })
     }
-  }
+  },
 ]
 
 const router = new VueRouter({

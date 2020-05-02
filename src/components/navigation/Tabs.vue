@@ -6,9 +6,10 @@
                     <Groups />
                 </b-tab>
                 <b-tab title="Second">
-
+                    <Table />
                 </b-tab>
                 <b-tab title="Disabled">
+
 
                 </b-tab>
             </b-tabs>
@@ -18,9 +19,10 @@
 
 <script>
     import Groups from "../groups/Groups";
+    import Table from "./Table";
 
     export default {
-        components:{Groups},
+        components:{Groups,Table},
         name: "Tabs"
     }
 </script>
