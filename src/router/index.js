@@ -82,7 +82,7 @@ const routes = [
     component:TeacherCourse
   },
   {
-    path:'/attendance/group/:group_id',
+    path:'/attendance/group/:lesson_id',
     name:'GroupAttendance',
     component:GroupAttendance
   },

@@ -1,7 +1,8 @@
 <template>
     <div class="vertical-nav">
         <b-nav vertical>
-            <b-nav-item active :href="item.link">{{item.text}}</b-nav-item>
+
+            <b-nav-item active><router-link :to="{ path: item.link}">{{item.text}}</router-link></b-nav-item>
         </b-nav>
     </div>
 </template>

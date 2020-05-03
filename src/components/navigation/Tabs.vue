@@ -18,7 +18,7 @@
 </template>
 
 <script>
-    import Groups from "../groups/Groups";
+    import Groups from "../groups/GroupsAttendance";
     import Table from "./Table";
 
     export default {
