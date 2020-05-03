@@ -84,7 +84,17 @@ const routes = [
   {
     path:'/attendance/group/:lesson_id',
     name:'GroupAttendance',
-    component:GroupAttendance
+    component:GroupAttendance,
+    beforeEnter(to, from, next) {
+      auth.methods.check('teacher')
+          .then(()=>{
+              next()
+          })
+          .catch((e)=>{
+              console.log(e)
+              next({name:"Login"})
+          })
+    }
   },
   {
     path:'/attendance/:subject_id',

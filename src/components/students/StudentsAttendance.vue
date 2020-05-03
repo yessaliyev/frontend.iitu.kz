@@ -17,28 +17,23 @@
                     striped borderless
                     class="dark-table"
             >
-                <!--      <template v-slot:cell(name_en)="row">-->
-                <!--      </template>-->
-
-                <!--      <template v-slot:cell(date)="row">-->
-                <!--      </template>-->
-
                 <template v-slot:cell(actions)="row">
-                    <b-form-radio-group label="Individual radios" >
-                        <b-form-radio @change="onChange($event)" name="some-radios"
+                    <b-form-radio-group >
+                        <b-form-radio @change="onChange($event,row.item)" name="some-radios" v-model="row.item.selected"
                                       :value="{status:1,student_id: row.item.student_id}">Present</b-form-radio>
-                        <b-form-radio @change="onChange($event)" name="some-radios"
+                        <b-form-radio @change="onChange($event,row.item)" name="some-radios" v-model="row.item.selected"
                                       :value="{status:0,student_id: row.item.student_id}">Absent</b-form-radio>
                     </b-form-radio-group>
+
                 </template>
 
-                <template v-slot:row-details="row">
-                    <b-card>
-                        <ul>
-                            <li v-for="(value, key) in row.item" :key="key">{{ key }}: {{ value }}</li>
-                        </ul>
-                    </b-card>
-                </template>
+<!--                <template v-slot:row-details="row">-->
+<!--                    <b-card>-->
+<!--                        <ul>-->
+<!--                            <li v-for="(value, key) in row.item" :key="key">{{ key }}: {{ value }}</li>-->
+<!--                        </ul>-->
+<!--                    </b-card>-->
+<!--                </template>-->
             </b-table>
 
             <b-button type="submit" variant="primary" class="c-center">Submit</b-button>
@@ -91,7 +86,6 @@
         name:"StudentsAttendance",
         data() {
             return {
-                test:null,
                 items: [],
                 fields: [
                     { key: 'student_id', label: 'Student ID', sortable: true, sortDirection: 'asc' },
@@ -101,8 +95,8 @@
                 ],
                 totalRows: 1,
                 currentPage: 1,
-                perPage: 1,
-                pageOptions: [1, 10, 15],
+                perPage: 5,
+                pageOptions: [5, 10, 15],
                 sortBy: '',
                 sortDesc: false,
                 sortDirection: 'asc',
@@ -132,7 +126,6 @@
             axios.get('http://backend.iitu.local/api/attendance/get-group-attendance?lesson_id='+this.$route.params.lesson_id,
                 {headers: {Authorization: "Bearer " + this.$store.getters.access_token}})
                 .then(response => {
-                    // eslint-disable-next-line no-unused-vars
                     for (const student of response.data){
 
                         let res = {
@@ -140,9 +133,21 @@
                             full_name:student.first_name + ' ' +student.last_name,
                         }
 
-                        this.items.push()
+                        if (student.status === 1){
+                            res.selected = {status:1,student_id:student.student_id}
+                            res.status = 1
+                            res.student_id = student.student_id
+                        }
 
-                        res.status = student.status === null ? -1 : student.status
+                        if (student.status === 0){
+                            res.selected = {status:0,student_id:student.student_id}
+                            res.status = 0
+                            res.student_id = student.student_id
+                        }
+
+                        if (student.status === null){
+                            res.status = -1;
+                        }
 
                         this.items.push(res)
                     }
@@ -178,12 +183,28 @@
             },
             onSubmit(evt){
                 evt.preventDefault();
-                console.log(evt.target)
+                const data = {
+                    students:this.items,
+                    lesson_id: this.$route.params.lesson_id
+                }
+                axios.post('http://backend.iitu.local/api/attendance/set-students-attendance',data,
+                    {headers: {Authorization: "Bearer " + this.$store.getters.access_token}})
+                    .then(response => {
+                        if (response.status === 200){
+                            console.log(response.data)
+                        }
+                    })
+                    .catch((error) => {
+                        if (error.response.status === 401){
+                            this.$router.push({name: "Login"})
+                        }
+                        console.log(error)
+                    })
             },
             onChange(evt){
                 console.log('test -----')
                 let cnt = 0;
-
+                console.log(evt)
                 for (let student of this.items){
                     if (student.student_id === evt.student_id){
                         console.log('BEFORE ->' + student.status)
