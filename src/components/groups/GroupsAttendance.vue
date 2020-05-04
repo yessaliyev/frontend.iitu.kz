@@ -17,13 +17,7 @@
       striped borderless
       class="dark-table"
     >
-<!--      <template v-slot:cell(name_en)="row">-->
-<!--      </template>-->
-
-<!--      <template v-slot:cell(date)="row">-->
-<!--      </template>-->
-
-      <template v-slot:cell(actions)="row">
+    <template v-slot:cell(actions)="row">
         <div class="h5 mb-0">
           <router-link :to="{ name: 'GroupAttendance',params: { lesson_id: row.item.id }}"><b-icon-forward-fill /></router-link>
           <router-link :to="{ name: 'Course'}"><b-icon-gear-fill /></router-link>
@@ -122,29 +116,23 @@
       }
     },
     mounted() {
-      // Set the initial number of items
-
-
       axios.get('http://backend.iitu.local/api/attendance/get-course-attendance',
-              {headers: {Authorization: "Bearer " + this.$store.getters.access_token}})
-               .then(response => {
-                   for (const group of response.data){
-                           this.items.push({
-                               id:group.id,
-                               group:group.name_en,
-                               date:group.date,
-                               type:group.type_en,
-                               room:group.room_num
-                           })
-                       }
-                   this.totalRows = this.items.length
-               })
-               .catch(function (error) {
-                   console.log(error)
-               });
-
-
-
+          {headers: {Authorization: "Bearer " + this.$store.getters.access_token}})
+           .then(response => {
+               for (const group of response.data){
+                       this.items.push({
+                           id:group.id,
+                           group:group.name_en,
+                           date:group.date,
+                           type:group.type_en,
+                           room:group.room_num
+                       })
+                   }
+               this.totalRows = this.items.length
+           })
+           .catch(function (error) {
+               console.log(error)
+           });
     },
     methods: {
       info(item, index, button) {
