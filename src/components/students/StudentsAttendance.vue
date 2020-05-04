@@ -18,31 +18,27 @@
                     class="dark-table"
             >
                 <template v-slot:cell(actions)="row">
-                    <b-form-radio-group >
-                        <b-form-radio @change="onChange($event,row.item)" name="some-radios" v-model="row.item.selected"
-                                      :value="{status:1,student_id: row.item.student_id}">Present</b-form-radio>
-                        <b-form-radio @change="onChange($event,row.item)" name="some-radios" v-model="row.item.selected"
-                                      :value="{status:0,student_id: row.item.student_id}">Absent</b-form-radio>
-                    </b-form-radio-group>
-
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label>P
+                                    <input type="radio" @change="onChange($event,row.item)"
+                                           v-model="row.item.selected" :value="1">
+                                </label>
+                            </div>
+                            <div class="col-md-3">
+                                <label >A
+                                    <input type="radio" @change="onChange($event,row.item)"
+                                           v-model="row.item.selected" :value="0">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
                 </template>
-
-<!--                <template v-slot:row-details="row">-->
-<!--                    <b-card>-->
-<!--                        <ul>-->
-<!--                            <li v-for="(value, key) in row.item" :key="key">{{ key }}: {{ value }}</li>-->
-<!--                        </ul>-->
-<!--                    </b-card>-->
-<!--                </template>-->
             </b-table>
 
             <b-button type="submit" variant="primary" class="c-center">Submit</b-button>
         </b-form>
-        <!-- Info modal -->
-        <b-modal :id="infoModal.id" :title="infoModal.title" ok-only @hide="resetInfoModal">
-            <pre>{{ infoModal.content }}</pre>
-        </b-modal>
-
 
         <b-row>
             <b-col sm="5" md="6" class="my-1">
@@ -90,7 +86,6 @@
                 fields: [
                     { key: 'student_id', label: 'Student ID', sortable: true, sortDirection: 'asc' },
                     { key: 'full_name', label: 'Full Name', sortable: true, class: 'text-center' },
-                    // { key: 'status', label: 'Status', sortable: true, class: 'text-center' },
                     { key: 'actions', label: 'Actions' },
                 ],
                 totalRows: 1,
@@ -120,29 +115,23 @@
             }
         },
         mounted() {
-            // Set the initial number of items
-
-
             axios.get('http://backend.iitu.local/api/attendance/get-group-attendance?lesson_id='+this.$route.params.lesson_id,
                 {headers: {Authorization: "Bearer " + this.$store.getters.access_token}})
                 .then(response => {
                     for (const student of response.data){
-
                         let res = {
                             student_id:student.student_id,
                             full_name:student.first_name + ' ' +student.last_name,
                         }
 
                         if (student.status === 1){
-                            res.selected = {status:1,student_id:student.student_id}
+                            res.selected = 1
                             res.status = 1
-                            res.student_id = student.student_id
                         }
 
                         if (student.status === 0){
-                            res.selected = {status:0,student_id:student.student_id}
+                            res.selected = 0
                             res.status = 0
-                            res.student_id = student.student_id
                         }
 
                         if (student.status === null){
@@ -163,19 +152,6 @@
 
         },
         methods: {
-            info(item, index, button) {
-                console.log(item);
-                console.log(index);
-                console.log(button);
-
-                this.infoModal.title = `Row index: ${index}`
-                this.infoModal.content = JSON.stringify(item, null, 2)
-                this.$root.$emit('bv::show::modal', this.infoModal.id, button)
-            },
-            resetInfoModal() {
-                this.infoModal.title = ''
-                this.infoModal.content = ''
-            },
             onFiltered(filteredItems) {
                 // Trigger pagination to update the number of buttons/pages due to filtering
                 this.totalRows = filteredItems.length
@@ -201,21 +177,12 @@
                         console.log(error)
                     })
             },
-            onChange(evt){
-                console.log('test -----')
-                let cnt = 0;
-                console.log(evt)
+            onChange(evt,item){
                 for (let student of this.items){
-                    if (student.student_id === evt.student_id){
-                        console.log('BEFORE ->' + student.status)
-                        student.status = evt.status
-                        console.log('AFTER ->' + student.status)
+                    if (student.student_id === item.student_id){
+                        student.status = evt.target.value
                     }
-                    cnt = cnt + 1
                 }
-
-                console.log('result')
-                console.log(this.items)
             }
         }
     }
