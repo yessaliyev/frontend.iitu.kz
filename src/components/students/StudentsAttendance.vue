@@ -18,22 +18,27 @@
                     class="dark-table"
             >
                 <template v-slot:cell(actions)="row">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label>P
-                                    <input type="radio" @change="onChange($event,row.item)"
-                                           v-model="row.item.selected" :value="1">
-                                </label>
-                            </div>
-                            <div class="col-md-3">
-                                <label >A
-                                    <input type="radio" @change="onChange($event,row.item)"
-                                           v-model="row.item.selected" :value="0">
-                                </label>
-                            </div>
+                    <div class="radio">
+                        <div class="radio1">
+                            <label>P
+                                <input type="radio" @change="onChange($event,row.item)"
+                                       v-model="row.item.selected" :value="1">
+                            </label>
+                        </div>
+                        <div class="radio2">
+                            <label >A
+                                <input type="radio" @change="onChange($event,row.item)"
+                                       v-model="row.item.selected" :value="0">
+                            </label>
+                        </div>
+                        <div class="radio3">
+                            <label >R
+                                <input type="radio" @change="onChange($event,row.item)"
+                                       v-model="row.item.selected" :value="2">
+                            </label>
                         </div>
                     </div>
+
                 </template>
             </b-table>
 
@@ -84,7 +89,7 @@
             return {
                 items: [],
                 fields: [
-                    { key: 'student_id', label: 'Student ID', sortable: true, sortDirection: 'asc' },
+                    { key: 'student_id', label: 'Student ID', sortable: true, sortDirection: 'asc',class: "custom-width" },
                     { key: 'full_name', label: 'Full Name', sortable: true, class: 'text-center' },
                     { key: 'actions', label: 'Actions' },
                 ],
@@ -131,6 +136,11 @@
 
                         if (student.status === 0){
                             res.selected = 0
+                            res.status = 0
+                        }
+
+                        if (student.status === 2){
+                            res.selected = 2
                             res.status = 0
                         }
 
@@ -192,5 +202,11 @@
     .table{
         color: white;
         background-color: #353c48;
+    }
+
+    .radio{
+        width: 45%;
+        display: grid;
+        grid-template-columns: 0.3fr 0.3fr 0.3fr
     }
 </style>

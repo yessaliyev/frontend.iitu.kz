@@ -24,6 +24,10 @@
     background-color: #353c48 !important
 }
 
+/*.custom-width{*/
+/*    width: 25%;*/
+/*}*/
+
 .dark-table tbody tr:hover{
     background-color: #444c58;
     color: white;
