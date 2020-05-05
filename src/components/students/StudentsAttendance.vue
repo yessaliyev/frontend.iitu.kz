@@ -45,7 +45,7 @@
             <b-button type="submit" variant="primary" class="c-center">Submit</b-button>
         </b-form>
 
-        <b-row>
+        <b-row class="padding">
             <b-col sm="5" md="6" class="my-1">
                 <b-form-group
                         label="Per page"
@@ -208,5 +208,9 @@
         width: 45%;
         display: grid;
         grid-template-columns: 0.3fr 0.3fr 0.3fr
+    }
+    .padding{
+        padding-bottom: 15px;
+        padding-top: 15px;
     }
 </style>

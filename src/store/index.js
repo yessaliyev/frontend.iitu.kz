@@ -8,7 +8,7 @@ export default new Vuex.Store({
   state: {
       access_token:localStorage.getItem('access_token')||null,
       refresh_token:localStorage.getItem('refresh_token')||null,
-      username:localStorage.getItem('username')||null,
+      user_name:localStorage.getItem('username')||null,
       user_id:localStorage.getItem('user_id')||null,
       user_role:localStorage.getItem('user_role')||null,
   },

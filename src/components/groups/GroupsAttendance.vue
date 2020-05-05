@@ -40,7 +40,7 @@
     </b-modal>
 
 
-    <b-row>
+    <b-row class="padding">
       <b-col sm="5" md="6" class="my-1">
         <b-form-group
           label="Per page"
@@ -91,8 +91,8 @@
         ],
         totalRows: 1,
         currentPage: 1,
-        perPage: 1,
-        pageOptions: [1, 10, 15],
+        perPage: 5,
+        pageOptions: [5, 10, 15],
         sortBy: '',
         sortDesc: false,
         sortDirection: 'asc',
@@ -161,6 +161,10 @@
     .table{
         color: white;
         background-color: #353c48;
+    }
+    .padding{
+      padding-bottom: 15px;
+      padding-top: 15px;
     }
 </style>
 

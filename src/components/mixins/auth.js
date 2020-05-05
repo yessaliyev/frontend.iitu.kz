@@ -13,11 +13,8 @@ export default {
                 if (store.getters.access_token !== null){
                 axios.get('http://backend.iitu.local/api/user/get',
                     {headers: {Authorization: "Bearer " + store.getters.access_token}})
-                    // eslint-disable-next-line no-unused-vars
                     .then((response)=> {
-                        //это чисто для того чтобы узнать проверить аутентифицирован ли пользователь
                         if (is_auth) resolve(true)
-
                         if (role !== null && role === response.data.role.role){
                             resolve(response.data)
                         }

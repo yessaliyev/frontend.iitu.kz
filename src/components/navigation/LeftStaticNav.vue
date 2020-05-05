@@ -3,7 +3,7 @@
         <h4>Static navigation</h4>
             <div class="home-left-static-nav">
                 <b-nav  vertical>
-                    <b-nav-item active href="#">Вопросы-ответы по ДО</b-nav-item>
+                    <b-nav-item active href="#">navigation 1</b-nav-item>
                     <b-nav-item active href="#">Вопросы-ответы по ДО</b-nav-item>
                     <b-nav-item active href="#">Вопросы-ответы по ДО</b-nav-item>
                     <b-nav-item active href="#">Вопросы-ответы по ДО</b-nav-item>
