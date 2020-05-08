@@ -15,19 +15,13 @@
 </template>
 
 <script>
-    import Courses from "../components/courses/Courses";
+    import Courses from "../components/courses/UserCourses";
     import HomeLeftNav from "../components/navigation/HomeLeftNav";
     import NavBar from "../components/navigation/NavBar";
-    // import auth from "../components/mixins/auth";
+
     export default {
         name: "Teacher",
         components: {Courses,HomeLeftNav,NavBar},
-        // mixins:[auth],
-        // beforeMount() {
-        //     this.check('teacher').catch(() => {
-        //         this.$router.push({name:'Home'})
-        //     })
-        // }
     }
 </script>
 

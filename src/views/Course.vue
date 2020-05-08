@@ -34,7 +34,7 @@
   import LeftStaticNav from "../components/navigation/LeftStaticNav";
   import VerticalNavItem from "../components/navigation/VerticalNavItem";
 
-  import Weeks from "../components/course/Weeks";
+  import Weeks from "../components/week/Weeks";
 
 export default {
   name: 'Course',

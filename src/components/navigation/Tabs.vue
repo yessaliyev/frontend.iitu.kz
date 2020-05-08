@@ -6,10 +6,9 @@
                     <Groups />
                 </b-tab>
                 <b-tab title="Add lesson">
-                    <Table />
+                    <add-lesson />
                 </b-tab>
                 <b-tab title="Disabled">
-
 
                 </b-tab>
             </b-tabs>
@@ -19,10 +18,10 @@
 
 <script>
     import Groups from "../groups/GroupsAttendance";
-    import Table from "./Table";
+    import AddLesson from "../lessons/AddLesson";
 
     export default {
-        components:{Groups,Table},
+        components:{Groups,AddLesson},
         name: "Tabs"
     }
 </script>

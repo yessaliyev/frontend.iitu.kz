@@ -39,7 +39,6 @@
 
 <script>
     import NavBar from "../components/navigation/NavBar";
-    import axios from "axios";
 
     export default {
         name: "Login",
@@ -57,43 +56,23 @@
         methods: {
             onSubmit(evt) {
                 evt.preventDefault();
-
                 this.$store.dispatch('retrieveUser',{
                     username: this.form.username,
                     password: this.form.password
                 })
                 .then(response => {
-                    console.log(response.data)
                     switch (response.data.role.role) {
                         case 'student':
-                            //,params:{id:response.data.roles[0].pivot.user_id}
-                            this.$router.push({name:"Student"})
+                            this.$router.push({name:"Courses"})
                             break;
                         case 'admin':
                             this.$router.push({name: "Admin"})
                             break
                         case 'teacher':
-                            //,params:{id:response.data.roles[0].pivot.user_id}
-                            this.$router.push({name:"Teacher"})
+                            this.$router.push({name:"Courses"})
                             break
                     }
                 });
-            }
-        },
-        beforeMount(){
-            console.log(this.$store.getters.access_token)
-            if (this.$store.getters.access_token !== null){
-                axios.get('http://backend.iitu.local/api/user/get',
-                    {headers: {Authorization: "Bearer " + this.$store.getters.access_token}})
-                    .then(response => {
-                        if (response.status === 200){
-                            console.log('good')
-                            this.$router.push({name: "Home"})
-                        }
-                    })
-                    .catch(function (e) {
-                        console.log(e)
-                    })
             }
         }
     }

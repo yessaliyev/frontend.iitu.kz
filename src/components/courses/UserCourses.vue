@@ -9,7 +9,7 @@
 </template>
 
 <script>
-    import CourseItem from "./CourseItem";
+    import CourseItem from "./UserCourseItem";
     import axios from "axios";
     export default {
         name: "Courses",

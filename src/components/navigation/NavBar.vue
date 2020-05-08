@@ -19,8 +19,9 @@
                 <div class="c-navbar-dropdown">
                     <b-dropdown right :text="logged_user.username">
                         <b-dropdown-item href="#">My profile</b-dropdown-item>
-                        <b-dropdown-item v-if="$store.getters.user_role === 'student' " :href="'/student/'">My courses</b-dropdown-item>
-                        <b-dropdown-item v-if="$store.getters.user_role === 'teacher' " :href="'/teacher/'">My courses</b-dropdown-item>
+                        <b-dropdown-item >
+                            <router-link :to="{ name: 'Courses'}">My Courses</router-link>
+                        </b-dropdown-item>
                         <b-dropdown-item @click="logout">logout</b-dropdown-item>
                     </b-dropdown>
                 </div>
@@ -79,9 +80,10 @@
     }
     .c-navbar a{
         color: white;
+        text-decoration: none;
     }
     .c-navbar a:hover{
-        color: wheat;
+        /*color: wheat;*/
     }
     .c-navbar-item{
         /*border: 1px solid red;*/
@@ -92,6 +94,10 @@
     .c-message{
         padding-right: 10px;
         float: right;
+    }
+
+    .c-navbar-dropdown li a{
+        color: black;
     }
 
 

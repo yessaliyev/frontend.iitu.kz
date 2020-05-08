@@ -7,7 +7,7 @@
             </div>
             <div class="main-block-items">
                 <div class="main-block-item">
-                    <Courses />
+                    <user-courses />
                 </div>
             </div>
         </div>
@@ -16,13 +16,13 @@
 </template>
 
 <script>
-    import Courses from "../components/courses/UserCourses";
+    import UserCourses from "../components/courses/UserCourses";
     import HomeLeftNav from "../components/navigation/HomeLeftNav";
     import NavBar from "../components/navigation/NavBar";
 
     export default {
-        name: "Student",
-        components: {Courses,HomeLeftNav,NavBar}
+        name: "Courses",
+        components: {UserCourses,HomeLeftNav,NavBar}
     }
 </script>
 

@@ -92,6 +92,8 @@
                     { key: 'student_id', label: 'Student ID', sortable: true, sortDirection: 'asc',class: "custom-width" },
                     { key: 'full_name', label: 'Full Name', sortable: true, class: 'text-center' },
                     { key: 'actions', label: 'Actions' },
+                    { key: 'notes', label: 'Notes' },
+
                 ],
                 totalRows: 1,
                 currentPage: 1,
@@ -127,6 +129,7 @@
                         let res = {
                             student_id:student.student_id,
                             full_name:student.first_name + ' ' +student.last_name,
+                            notes:student.notes
                         }
 
                         if (student.status === 1){
