@@ -51,7 +51,7 @@ export default {
       subject_nav:[
         {id:0,text:'Announcements',link:'#'},
         {id:1,text:'Materials',link:'#'},
-        {id:2,text:'Attendance',link:'/attendance/' + this.$route.params.subject_id},
+        {id:2,text:'Attendance',link:'/attendance/course/' + this.$route.params.subject_id},
       ]
     }
   },

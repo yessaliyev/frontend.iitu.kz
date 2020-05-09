@@ -184,6 +184,9 @@
                             this.$router.push({name: "Login"})
                         }
                     });
+            },
+            setDefaultAttendance(){
+
             }
 
         },

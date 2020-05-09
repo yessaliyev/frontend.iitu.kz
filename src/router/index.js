@@ -1,8 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-// import Student from "../views/Student";
-// import Teacher from "../views/Teacher";
 import Admin from "../views/Admin";
 import Login from "../views/Login";
 import Attendance from "../views/Attendance";
@@ -36,35 +34,6 @@ const routes = [
                 })
         }
     },
-    // {
-    //     path:'/student',
-    //     name:'Student',
-    //     component: Student,
-    //     beforeEnter(to, from, next) {
-    //        auth.methods.check('student')
-    //            .then(()=>{
-    //              next()
-    //            })
-    //            .catch(()=>{
-    //              next({name:"Home"})
-    //            })
-    //     }
-    // },
-    // {
-    //     path:'/teacher',
-    //     name:'Teacher',
-    //     component: Teacher,
-    //     beforeEnter(to, from, next) {
-    //        auth.methods.check('teacher')
-    //            .then(()=>{
-    //              next()
-    //            })
-    //            .catch((e)=>{
-    //              console.log(e)
-    //              next({name:"Home"})
-    //            })
-    //     }
-    // },
     {
       path:'courses',
       name:'Courses',
@@ -91,11 +60,11 @@ const routes = [
         }
     },
     {
-        path:'/attendance/group/:lesson_id',
+        path:'/attendance/lesson/:lesson_id',
         name:'GroupAttendance',
         component:GroupAttendance,
         beforeEnter(to, from, next) {
-          auth.methods.check('teacher')
+            auth.methods.check('teacher')
               .then(()=>{
                   next()
               })
@@ -106,18 +75,18 @@ const routes = [
         }
     },
     {
-        path:'/attendance/:subject_id',
+        path:'/attendance/course/:subject_id',
         name:'Attendance',
         component:Attendance,
         beforeEnter(to, from, next) {
-           auth.methods.check(store.getters.user_role,true)
-               .then(()=>{
-                 next()
-               })
-               .catch((e)=>{
-                 console.log(e)
-                 next({name:"Login"})
-               })
+            auth.methods.check(store.getters.user_role,true)
+                .then(()=>{
+                     next()
+                })
+                .catch((e)=>{
+                    console.log(e)
+                    next({name:"Login"})
+                })
         }
     },
 ]

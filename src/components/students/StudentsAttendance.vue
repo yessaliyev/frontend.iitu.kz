@@ -122,6 +122,7 @@
             }
         },
         mounted() {
+            console.log(this.$route.params)
             axios.get('http://backend.iitu.local/api/attendance/get-group-attendance?lesson_id='+this.$route.params.lesson_id,
                 {headers: {Authorization: "Bearer " + this.$store.getters.access_token}})
                 .then(response => {

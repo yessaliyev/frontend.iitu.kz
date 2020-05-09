@@ -19,26 +19,12 @@
     >
     <template v-slot:cell(actions)="row">
         <div class="h5 mb-0">
-          <router-link :to="{ name: 'GroupAttendance',params: { lesson_id: row.item.id }}"><b-icon-forward-fill /></router-link>
+          <router-link :to="{ name: 'GroupAttendance',params: { lesson_id: row.item.id}}"><b-icon-forward-fill /></router-link>
           <router-link :to="{ name: 'Course'}"><b-icon-gear-fill /></router-link>
           <router-link :to="{ name: 'Course'}"><b-icon-x-circle-fill /></router-link>
         </div>
       </template>
-
-      <template v-slot:row-details="row">
-        <b-card>
-          <ul>
-            <li v-for="(value, key) in row.item" :key="key">{{ key }}: {{ value }}</li>
-          </ul>
-        </b-card>
-      </template>
     </b-table>
-
-    <!-- Info modal -->
-    <b-modal :id="infoModal.id" :title="infoModal.title" ok-only @hide="resetInfoModal">
-      <pre>{{ infoModal.content }}</pre>
-    </b-modal>
-
 
     <b-row class="padding">
       <b-col sm="5" md="6" class="my-1">
@@ -79,6 +65,7 @@
   import axios from "axios"
   export default {
   name:"GroupsAttendance",
+    props:['group_id'],
     data() {
       return {
         items: [],
@@ -116,16 +103,20 @@
       }
     },
     mounted() {
+
       axios.get('http://backend.iitu.local/api/attendance/get-course-attendance',
           {headers: {Authorization: "Bearer " + this.$store.getters.access_token}})
            .then(response => {
-               for (const group of response.data){
+             console.log(response.data)
+
+             for (const group of response.data){
                        this.items.push({
-                           id:group.id,
-                           group:group.name_en,
-                           date:group.date,
-                           type:group.type_en,
-                           room:group.room_num
+                         id:group.id,
+                         group_id:group.group_id,
+                         group:group.name_en,
+                         date:group.date,
+                         type:group.type_en,
+                         room:group.room_num
                        })
                    }
                this.totalRows = this.items.length

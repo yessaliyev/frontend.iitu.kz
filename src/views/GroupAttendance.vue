@@ -11,7 +11,6 @@
                 </div>
             </div>
             <div class="lessons">
-              <h4>Lessons</h4>
               <div class="main-block-items">
                   <StudentsAttendance />
               </div>
@@ -38,7 +37,8 @@
         },
         data(){
             return {}
-        }
+        },
+
     }
 </script>
 
