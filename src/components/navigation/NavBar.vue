@@ -47,8 +47,8 @@
                     .then(response => {
                         this.logged_user = response.data
                     })
-                    .catch(function (e) {
-                        console.log(e)
+                    .catch(function () {
+                        // console.log(e)
                     })
             }
         },

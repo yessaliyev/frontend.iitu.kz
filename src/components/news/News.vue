@@ -23,8 +23,9 @@
                 .then(response => {
                     this.news = response.data
                 })
-                .catch(function (error) {
-                    console.log(error)
+                .catch(function () {
+
+                    // console.log(error)
                 });
         }
 

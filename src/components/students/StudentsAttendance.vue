@@ -122,7 +122,7 @@
             }
         },
         mounted() {
-            console.log(this.$route.params)
+            // console.log(this.$route.params)
             axios.get('http://backend.iitu.local/api/attendance/get-group-attendance?lesson_id='+this.$route.params.lesson_id,
                 {headers: {Authorization: "Bearer " + this.$store.getters.access_token}})
                 .then(response => {
@@ -155,11 +155,11 @@
                         this.items.push(res)
                     }
 
-                    console.log(this.items)
+                    // console.log(this.items)
                     this.totalRows = this.items.length
                 })
-                .catch(function (error) {
-                    console.log(error)
+                .catch(function () {
+                    // console.log(error)
                 });
 
 
@@ -181,14 +181,14 @@
                     {headers: {Authorization: "Bearer " + this.$store.getters.access_token}})
                     .then(response => {
                         if (response.status === 200){
-                            console.log(response.data)
+                            // console.log(response.data)
                         }
                     })
                     .catch((error) => {
                         if (error.response.status === 401){
                             this.$router.push({name: "Login"})
                         }
-                        console.log(error)
+                        // console.log(error)
                     })
             },
             onChange(evt,item){

@@ -119,8 +119,8 @@
                             this.departments.push({text:department.name_en,value:department.id})
                         }
                     })
-                    .catch(function (error) {
-                        console.log(error)
+                    .catch(function () {
+                        // console.log(error)
                     });
             },
             getGroups(course){
@@ -130,8 +130,8 @@
                             this.groups.push({text:group.name_en,value:group.id})
                         }
                     })
-                    .catch(function (error) {
-                        console.log(error)
+                    .catch(function () {
+                        // console.log(error)
                     });
             },
             onSubmit(evt) {
@@ -152,21 +152,21 @@
                     data.regalia = {regalia_en: this.form.regalia_en}
                 }
 
-                console.log(data)
+                // console.log(data)
 
                 if (this.$store.getters.access_token !== null){
                     axios.post('http://backend.iitu.local/api/auth/register',data,
                         {headers: {Authorization: "Bearer " + this.$store.getters.access_token}})
                         .then(response => {
                             if (response.status === 200){
-                                console.log(response.data)
+                                // console.log(response.data)
                             }
                         })
                         .catch((error) => {
                             if (error.response.status === 401){
                                 this.$router.push({name: "Login"})
                             }
-                            console.log(error)
+                            // console.log(error)
                         })
                 }else {
                     this.$router.push({name:"Login"})
@@ -189,7 +189,7 @@
                     }
                 })
                 .catch(function (error) {
-                    console.log(error)
+                    // console.log(error)
                 });
         },
 

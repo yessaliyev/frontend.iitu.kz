@@ -107,7 +107,7 @@
       axios.get('http://backend.iitu.local/api/attendance/get-course-attendance',
           {headers: {Authorization: "Bearer " + this.$store.getters.access_token}})
            .then(response => {
-             console.log(response.data)
+             // console.log(response.data)
 
              for (const group of response.data){
                        this.items.push({
@@ -121,15 +121,15 @@
                    }
                this.totalRows = this.items.length
            })
-           .catch(function (error) {
-               console.log(error)
+           .catch(function () {
+               // console.log(error)
            });
     },
     methods: {
       info(item, index, button) {
-        console.log(item);
-        console.log(index);
-        console.log(button);
+        // console.log(item);
+        // console.log(index);
+        // console.log(button);
 
         this.infoModal.title = `Row index: ${index}`
         this.infoModal.content = JSON.stringify(item, null, 2)

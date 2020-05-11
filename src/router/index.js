@@ -28,8 +28,8 @@ const routes = [
                     next({name:"Home"})
 
                 })
-                .catch((e)=>{
-                    console.log(e)
+                .catch(()=>{
+                    // console.log(e)
                     next()
                 })
         }
@@ -53,8 +53,8 @@ const routes = [
                .then(()=>{
                  next()
                })
-               .catch((e)=>{
-                 console.log(e)
+               .catch(()=>{
+                 // console.log(e)
                  next({name:"Login"})
                })
         }
@@ -68,8 +68,8 @@ const routes = [
               .then(()=>{
                   next()
               })
-              .catch((e)=>{
-                  console.log(e)
+              .catch(()=>{
+                  // console.log(e)
                   next({name:"Login"})
               })
         }
@@ -83,8 +83,8 @@ const routes = [
                 .then(()=>{
                      next()
                 })
-                .catch((e)=>{
-                    console.log(e)
+                .catch(()=>{
+                    // console.log()
                     next({name:"Login"})
                 })
         }
