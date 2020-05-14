@@ -112,7 +112,7 @@
         },
         methods:{
             getDepartments(){
-                axios.get(process.env.VUE_APP_API++'api/department/get-all')
+                axios.get(process.env.VUE_APP_API+'api/department/get-all')
                     .then(response => {
                         for (const department of response.data){
                             if (response.data.length <= this.departments.length){ break }
