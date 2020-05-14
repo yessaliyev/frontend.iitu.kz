@@ -19,13 +19,13 @@
             }
         },
         mounted(){
-            axios.get(process.env.VUE_APP_API+'api/news/get')
+            axios.get(process.env.VUE_APP_API+'api/news/get/')
                 .then(response => {
                     this.news = response.data
                 })
-                .catch(function () {
+                .catch((e) {
 
-                    // console.log(error)
+                        alert(e)
                 });
         }
 
