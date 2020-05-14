@@ -23,7 +23,7 @@
                 .then(response => {
                     this.news = response.data
                 })
-                .catch((e) {
+                .catch((e) => {
 
                         alert(e)
                 });
