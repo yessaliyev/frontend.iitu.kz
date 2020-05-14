@@ -26,7 +26,7 @@
 
         beforeMount() {
             if (this.$store.getters.access_token !== null){
-                axios.get('http://backend.iitu.local/api/user/get',
+                axios.get(process.env.VUE_APP_API+'api/user/get',
                     {headers: {Authorization: "Bearer " + this.$store.getters.access_token}})
                     .then(response => {
                         if (response.status !== 200 || response.data.role.role !== 'admin'){

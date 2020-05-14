@@ -141,7 +141,7 @@
         methods:{
             onSubmit(evt){
                 evt.preventDefault();
-                axios.post('http://backend.iitu.local/api/subject/create-lesson',this.form,
+                axios.post(process.env.VUE_APP_API+'api/subject/create-lesson',this.form,
                     {headers: {Authorization: "Bearer " + this.$store.getters.access_token}})
                     .then(response => {
                         for (const type of response.data){
@@ -156,7 +156,7 @@
                     });
             },
             getTypes(){
-                axios.get('http://backend.iitu.local/api/subject/get-types',
+                axios.get(process.env.VUE_APP_API+'api/subject/get-types',
                     {headers: {Authorization: "Bearer " + this.$store.getters.access_token}})
                     .then(response => {
                         for (const type of response.data){
@@ -171,7 +171,7 @@
                     });
             },
             getGroups(){
-                axios.get('http://backend.iitu.local/api/subject/get-groups?subject_id='+this.form.subject_id,
+                axios.get(process.env.VUE_APP_API+'api/subject/get-groups?subject_id='+this.form.subject_id,
                     {headers: {Authorization: "Bearer " + this.$store.getters.access_token}})
                     .then(response => {
                         for (const group of response.data){

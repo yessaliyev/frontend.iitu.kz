@@ -123,7 +123,7 @@
         },
         mounted() {
             // console.log(this.$route.params)
-            axios.get('http://backend.iitu.local/api/attendance/get-group-attendance?lesson_id='+this.$route.params.lesson_id,
+            axios.get(process.env.VUE_APP_API+'api/attendance/get-group-attendance?lesson_id='+this.$route.params.lesson_id,
                 {headers: {Authorization: "Bearer " + this.$store.getters.access_token}})
                 .then(response => {
                     for (const student of response.data){
@@ -177,7 +177,7 @@
                     students:this.items,
                     lesson_id: this.$route.params.lesson_id
                 }
-                axios.post('http://backend.iitu.local/api/attendance/set-students-attendance',data,
+                axios.post(process.env.VUE_APP_API+'api/attendance/set-students-attendance',data,
                     {headers: {Authorization: "Bearer " + this.$store.getters.access_token}})
                     .then(response => {
                         if (response.status === 200){

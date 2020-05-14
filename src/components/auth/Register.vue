@@ -112,7 +112,7 @@
         },
         methods:{
             getDepartments(){
-                axios.get('http://backend.iitu.local/api/department/get-all')
+                axios.get(process.env.VUE_APP_API++'api/department/get-all')
                     .then(response => {
                         for (const department of response.data){
                             if (response.data.length <= this.departments.length){ break }
@@ -124,7 +124,7 @@
                     });
             },
             getGroups(course){
-                axios.get('http://backend.iitu.local/api/group/get-all?course=' + course)
+                axios.get(process.env.VUE_APP_API+'api/group/get-all?course=' + course)
                     .then(response => {
                         for (const group of response.data){
                             this.groups.push({text:group.name_en,value:group.id})
@@ -155,7 +155,7 @@
                 // console.log(data)
 
                 if (this.$store.getters.access_token !== null){
-                    axios.post('http://backend.iitu.local/api/auth/register',data,
+                    axios.post(process.env.VUE_APP_API+'api/auth/register',data,
                         {headers: {Authorization: "Bearer " + this.$store.getters.access_token}})
                         .then(response => {
                             if (response.status === 200){
@@ -182,7 +182,7 @@
             }
         },
         mounted() {
-            axios.get('http://backend.iitu.local/api/user/get-roles')
+            axios.get(process.env.VUE_APP_API+'api/user/get-roles')
                 .then(response => {
                     for (const role of response.data){
                         this.role_options.push({text:role.role,value:{role_id:role.id,role_name:role.role}})

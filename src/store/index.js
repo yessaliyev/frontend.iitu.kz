@@ -64,7 +64,7 @@ export default new Vuex.Store({
   actions: {
     retrieveUser(context,data){
         return new Promise((resolve, reject) => {
-            axios.post('http://backend.iitu.local/api/auth/login', {
+            axios.post(process.env.VUE_APP_API+'api/auth/login', {
                 username: data.username,
                 password: data.password
             })
@@ -100,7 +100,7 @@ export default new Vuex.Store({
     },
     logout(context){
         return new Promise((resolve,reject) => {
-            axios.post('http://backend.iitu.local/api/auth/logout', {}, {headers: { Authorization: "Bearer " + context.getters.access_token }})
+            axios.post(process.env.VUE_APP_API+'api/auth/logout', {}, {headers: { Authorization: "Bearer " + context.getters.access_token }})
                 .then((response) => {
 
                     localStorage.removeItem('access_token')

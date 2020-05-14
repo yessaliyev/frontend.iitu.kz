@@ -11,7 +11,7 @@ export default {
         check(role,is_auth = false){
             return new Promise(((resolve, reject) => {
                 if (store.getters.access_token !== null){
-                axios.get('http://backend.iitu.local/api/user/get',
+                axios.get(process.env.VUE_APP_API+'api/user/get',
                     {headers: {Authorization: "Bearer " + store.getters.access_token}})
                     .then((response)=> {
                         if (is_auth) resolve(true)

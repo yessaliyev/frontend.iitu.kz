@@ -20,7 +20,7 @@
             }
         },
         mounted(){
-            axios.get('http://backend.iitu.local/api/subject/get',
+            axios.get(process.env.VUE_APP_API+'api/subject/get',
                 {headers: {Authorization: "Bearer " + this.$store.getters.access_token}})
                 .then(response => {
                     this.courses = response.data

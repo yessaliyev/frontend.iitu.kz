@@ -104,7 +104,7 @@
     },
     mounted() {
 
-      axios.get('http://backend.iitu.local/api/attendance/get-course-attendance',
+      axios.get(process.env.VUE_APP_API+'api/attendance/get-course-attendance',
           {headers: {Authorization: "Bearer " + this.$store.getters.access_token}})
            .then(response => {
              // console.log(response.data)
