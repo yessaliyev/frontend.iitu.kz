@@ -26,13 +26,13 @@
                             </label>
                         </div>
                         <div class="radio2">
-                            <label >A
+                            <label>A
                                 <input type="radio" @change="onChange($event,row.item)"
                                        v-model="row.item.selected" :value="0">
                             </label>
                         </div>
                         <div class="radio3">
-                            <label >R
+                            <label>R
                                 <input type="radio" @change="onChange($event,row.item)"
                                        v-model="row.item.selected" :value="2">
                             </label>
@@ -83,16 +83,23 @@
 
 <script>
     import axios from "axios"
+
     export default {
-        name:"StudentsAttendance",
+        name: "StudentsAttendance",
         data() {
             return {
                 items: [],
                 fields: [
-                    { key: 'student_id', label: 'Student ID', sortable: true, sortDirection: 'asc',class: "custom-width" },
-                    { key: 'full_name', label: 'Full Name', sortable: true, class: 'text-center' },
-                    { key: 'actions', label: 'Actions' },
-                    { key: 'notes', label: 'Notes' },
+                    {
+                        key: 'student_id',
+                        label: 'Student ID',
+                        sortable: true,
+                        sortDirection: 'asc',
+                        class: "custom-width"
+                    },
+                    {key: 'full_name', label: 'Full Name', sortable: true, class: 'text-center'},
+                    {key: 'actions', label: 'Actions'},
+                    {key: 'notes', label: 'Notes'},
 
                 ],
                 totalRows: 1,
@@ -117,38 +124,38 @@
                 return this.fields
                     .filter(f => f.sortable)
                     .map(f => {
-                        return { text: f.label, value: f.key }
+                        return {text: f.label, value: f.key}
                     })
             }
         },
         mounted() {
             // console.log(this.$route.params)
-            axios.get(process.env.VUE_APP_API+'api/attendance/get-group-attendance?lesson_id='+this.$route.params.lesson_id,
+            axios.get(process.env.VUE_APP_API + 'api/attendance/get-group-attendance?lesson_id=' + this.$route.params.lesson_id,
                 {headers: {Authorization: "Bearer " + this.$store.getters.access_token}})
                 .then(response => {
-                    for (const student of response.data){
+                    for (const student of response.data) {
                         let res = {
-                            student_id:student.student_id,
-                            full_name:student.first_name + ' ' +student.last_name,
-                            notes:student.notes
+                            student_id: student.student_id,
+                            full_name: student.first_name + ' ' + student.last_name,
+                            notes: student.notes
                         }
 
-                        if (student.status === 1){
+                        if (student.status === 1) {
                             res.selected = 1
                             res.status = 1
                         }
 
-                        if (student.status === 0){
+                        if (student.status === 0) {
                             res.selected = 0
                             res.status = 0
                         }
 
-                        if (student.status === 2){
+                        if (student.status === 2) {
                             res.selected = 2
                             res.status = 0
                         }
 
-                        if (student.status === null){
+                        if (student.status === null) {
                             res.status = -1;
                         }
 
@@ -163,7 +170,6 @@
                 });
 
 
-
         },
         methods: {
             onFiltered(filteredItems) {
@@ -171,29 +177,29 @@
                 this.totalRows = filteredItems.length
                 this.currentPage = 1
             },
-            onSubmit(evt){
+            onSubmit(evt) {
                 evt.preventDefault();
                 const data = {
-                    students:this.items,
+                    students: this.items,
                     lesson_id: this.$route.params.lesson_id
                 }
-                axios.post(process.env.VUE_APP_API+'api/attendance/set-students-attendance',data,
+                axios.post(process.env.VUE_APP_API + 'api/attendance/set-students-attendance', data,
                     {headers: {Authorization: "Bearer " + this.$store.getters.access_token}})
                     .then(response => {
-                        if (response.status === 200){
+                        if (response.status === 200) {
                             // console.log(response.data)
                         }
                     })
                     .catch((error) => {
-                        if (error.response.status === 401){
+                        if (error.response.status === 401) {
                             this.$router.push({name: "Login"})
                         }
                         // console.log(error)
                     })
             },
-            onChange(evt,item){
-                for (let student of this.items){
-                    if (student.student_id === item.student_id){
+            onChange(evt, item) {
+                for (let student of this.items) {
+                    if (student.student_id === item.student_id) {
                         student.status = evt.target.value
                     }
                 }
@@ -203,17 +209,18 @@
 </script>
 
 <style scoped>
-    .table{
+    .table {
         color: white;
         background-color: #353c48;
     }
 
-    .radio{
+    .radio {
         width: 45%;
         display: grid;
         grid-template-columns: 0.3fr 0.3fr 0.3fr
     }
-    .padding{
+
+    .padding {
         padding-bottom: 15px;
         padding-top: 15px;
     }

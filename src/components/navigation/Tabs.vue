@@ -2,11 +2,11 @@
     <div class="">
         <div class="tabs">
             <b-tabs content-class="mt-3" active-nav-item-class="dark-back white-text" class="white-link">
-                <b-tab title="Lessons" >
-                    <Groups />
+                <b-tab title="Lessons">
+                    <Groups/>
                 </b-tab>
                 <b-tab title="Add lesson">
-                    <add-lesson />
+                    <add-lesson/>
                 </b-tab>
                 <b-tab title="Disabled">
 
@@ -21,11 +21,11 @@
     import AddLesson from "../lessons/AddLesson";
 
     export default {
-        components:{Groups,AddLesson},
+        components: {Groups, AddLesson},
         name: "Tabs"
     }
 </script>
 
-<style >
+<style>
 
 </style>

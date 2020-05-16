@@ -1,13 +1,13 @@
 <template>
     <div>
-        <NavBar />
+        <NavBar/>
         <div class="main-block">
             <div class="left-block-nav">
-                <home-left-nav />
+                <home-left-nav/>
             </div>
             <div class="main-block-items">
                 <div class="main-block-item">
-                    <user-courses />
+                    <user-courses/>
                 </div>
             </div>
         </div>
@@ -22,7 +22,7 @@
 
     export default {
         name: "Courses",
-        components: {UserCourses,HomeLeftNav,NavBar}
+        components: {UserCourses, HomeLeftNav, NavBar}
     }
 </script>
 

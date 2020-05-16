@@ -1,6 +1,6 @@
 <template>
-    <div class="add-lesson-block shadow dark-back" >
-        <b-form @submit="onSubmit" class="" >
+    <div class="add-lesson-block shadow dark-back">
+        <b-form @submit="onSubmit" class="">
             <div class="form">
                 <div class=""><h6>Subject type</h6></div>
                 <div class="">
@@ -26,7 +26,8 @@
             <div class="form">
                 <div><h6>Date</h6></div>
                 <div>
-                    <b-form-datepicker size="sm" id="datepicker" reset-button v-model="form.date" class=""></b-form-datepicker>
+                    <b-form-datepicker size="sm" id="datepicker" reset-button v-model="form.date"
+                                       class=""></b-form-datepicker>
                 </div>
             </div>
             <div class="form darker">
@@ -79,7 +80,7 @@
                             <img height="38" src="@/assets/weeks/mon.png" alt="image slot">
                         </label>
                         <label>
-                            <input type="checkbox" name="test" value="small" v-model="form.days.tue" >
+                            <input type="checkbox" name="test" value="small" v-model="form.days.tue">
                             <img height="38" src="@/assets/weeks/tue.png" alt="image slot">
                         </label>
                         <label>
@@ -123,69 +124,69 @@
         data() {
             return {
                 form: {
-                    subject_id:this.$route.params.subject_id,
-                    group_id:null,
-                    date:'',
-                    time:'',
-                    subject_type_id:null,
-                    repeats:null,
-                    room_num:null,
-                    days:{mon:null,tue:null,wed:null,thu:null,fri:null,sat:null}
+                    subject_id: this.$route.params.subject_id,
+                    group_id: null,
+                    date: '',
+                    time: '',
+                    subject_type_id: null,
+                    repeats: null,
+                    room_num: null,
+                    days: {mon: null, tue: null, wed: null, thu: null, fri: null, sat: null}
                 },
-                subject_types:[{text:"please select subject type",value:null}],
-                groups:[{text:"please select group",value:null}],
-                repeats:[{text:1,value:1},{text:2,value:2},{text:3,value:3},{text:4,value:4}]
+                subject_types: [{text: "please select subject type", value: null}],
+                groups: [{text: "please select group", value: null}],
+                repeats: [{text: 1, value: 1}, {text: 2, value: 2}, {text: 3, value: 3}, {text: 4, value: 4}]
             }
         },
 
-        methods:{
-            onSubmit(evt){
+        methods: {
+            onSubmit(evt) {
                 evt.preventDefault();
-                axios.post(process.env.VUE_APP_API+'api/subject/create-lesson',this.form,
+                axios.post(process.env.VUE_APP_API + 'api/subject/create-lesson', this.form,
                     {headers: {Authorization: "Bearer " + this.$store.getters.access_token}})
                     .then(response => {
-                        for (const type of response.data){
-                            this.subject_types.push({text:type.type_en,value:type.id})
+                        for (const type of response.data) {
+                            this.subject_types.push({text: type.type_en, value: type.id})
                         }
 
                     })
                     .catch((error) => {
-                        if (error.response.status === 401){
+                        if (error.response.status === 401) {
                             this.$router.push({name: "Login"})
                         }
                     });
             },
-            getTypes(){
-                axios.get(process.env.VUE_APP_API+'api/subject/get-types',
+            getTypes() {
+                axios.get(process.env.VUE_APP_API + 'api/subject/get-types',
                     {headers: {Authorization: "Bearer " + this.$store.getters.access_token}})
                     .then(response => {
-                        for (const type of response.data){
-                            this.subject_types.push({text:type.type_en,value:type.id})
+                        for (const type of response.data) {
+                            this.subject_types.push({text: type.type_en, value: type.id})
                         }
 
                     })
                     .catch((error) => {
-                        if (error.response.status === 401){
+                        if (error.response.status === 401) {
                             this.$router.push({name: "Login"})
                         }
                     });
             },
-            getGroups(){
-                axios.get(process.env.VUE_APP_API+'api/subject/get-groups?subject_id='+this.form.subject_id,
+            getGroups() {
+                axios.get(process.env.VUE_APP_API + 'api/subject/get-groups?subject_id=' + this.form.subject_id,
                     {headers: {Authorization: "Bearer " + this.$store.getters.access_token}})
                     .then(response => {
-                        for (const group of response.data){
-                            this.groups.push({text:group.name_en,value:group.id})
+                        for (const group of response.data) {
+                            this.groups.push({text: group.name_en, value: group.id})
                         }
 
                     })
                     .catch((error) => {
-                        if (error.response.status === 401){
+                        if (error.response.status === 401) {
                             this.$router.push({name: "Login"})
                         }
                     });
             },
-            setDefaultAttendance(){
+            setDefaultAttendance() {
 
             }
 
@@ -199,25 +200,28 @@
 </script>
 
 <style scoped>
-    .add-lesson-block{
+    .add-lesson-block {
 
     }
-    .form{
+
+    .form {
         padding: 15px;
         display: grid;
         grid-template-columns: 0.3fr 0.3fr;
         justify-content: space-evenly;
         align-items: center;
     }
-    .darker{
+
+    .darker {
         background-color: #323944;
 
     }
 
-    .c-center{
+    .c-center {
         margin: 1% 50%;
     }
-    .week-items{
+
+    .week-items {
         display: grid;
         grid-template-columns: 0.8fr 0.2fr;
     }
@@ -241,6 +245,7 @@
         transform: scale(1.1);
         transition: 0.2s;
     }
+
     /* CHECKED STYLES */
     [type=checkbox]:checked + img {
         filter: brightness(85%);

@@ -21,80 +21,90 @@ const routes = [
     {
         path: '/login',
         name: 'Login',
-        component:Login,
+        component: Login,
         beforeEnter(to, from, next) {
-            auth.methods.check(store.getters.user_role,true)
-                .then(()=>{
-                    next({name:"Home"})
+            auth.methods.check(store.getters.user_role, true)
+                .then(() => {
+                    next({name: "Home"})
 
                 })
-                .catch(()=>{
+                .catch(() => {
                     // console.log(e)
                     next()
                 })
         }
     },
     {
-      path:'courses',
-      name:'Courses',
-      component:Courses
+        path: 'courses',
+        name: 'Courses',
+        component: Courses
     },
     {
-        path:'/admin',
-        name:'Admin',
-        component: Admin
-    },
-    {
-        path:'/course/:subject_id',
-        name:'Course',
-        component:Course,
-        beforeEnter(to, from, next) {
-           auth.methods.check(store.getters.user_role,true)
-               .then(()=>{
-                 next()
-               })
-               .catch(()=>{
-                 // console.log(e)
-                 next({name:"Login"})
-               })
-        }
-    },
-    {
-        path:'/attendance/lesson/:lesson_id',
-        name:'GroupAttendance',
-        component:GroupAttendance,
+        path: '/admin',
+        name: 'Admin',
+        component: Admin,
         beforeEnter(to, from, next) {
             auth.methods.check('teacher')
-              .then(()=>{
-                  next()
-              })
-              .catch(()=>{
-                  // console.log(e)
-                  next({name:"Login"})
-              })
+                .then(() => {
+                    next()
+                })
+                .catch(() => {
+                    // console.log(e)
+                    next({name: "Login"})
+                })
         }
     },
     {
-        path:'/attendance/course/:subject_id',
-        name:'Attendance',
-        component:Attendance,
+        path: '/course/:subject_id',
+        name: 'Course',
+        component: Course,
         beforeEnter(to, from, next) {
-            auth.methods.check(store.getters.user_role,true)
-                .then(()=>{
-                     next()
+            auth.methods.check(store.getters.user_role, true)
+                .then(() => {
+                    next()
                 })
-                .catch(()=>{
+                .catch(() => {
+                    // console.log(e)
+                    next({name: "Login"})
+                })
+        }
+    },
+    {
+        path: '/attendance/lesson/:lesson_id',
+        name: 'GroupAttendance',
+        component: GroupAttendance,
+        beforeEnter(to, from, next) {
+            auth.methods.check('teacher')
+                .then(() => {
+                    next()
+                })
+                .catch(() => {
+                    // console.log(e)
+                    next({name: "Login"})
+                })
+        }
+    },
+    {
+        path: '/attendance/course/:subject_id',
+        name: 'Attendance',
+        component: Attendance,
+        beforeEnter(to, from, next) {
+            auth.methods.check(store.getters.user_role, true)
+                .then(() => {
+                    next()
+                })
+                .catch(() => {
                     // console.log()
-                    next({name:"Login"})
+                    next({name: "Login"})
                 })
         }
     },
 ]
 
 const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes
+    mode: 'history',
+    base: process.env.BASE_URL,
+    routes
 })
 
 export default router

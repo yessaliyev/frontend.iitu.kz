@@ -3,8 +3,8 @@
         <h4>Navigation</h4>
         <div class="home-left-nav ">
             <vertical-nav-item
-                v-for="item in nav_items" :key="item.id"
-                v-bind:item="item"
+                    v-for="item in nav_items" :key="item.id"
+                    v-bind:item="item"
             />
         </div>
     </div>
@@ -12,30 +12,31 @@
 
 <script>
     import VerticalNavItem from "./VerticalNavItem";
+
     export default {
         name: "HomeLeftNav",
-        components:{VerticalNavItem},
-        data(){
+        components: {VerticalNavItem},
+        data() {
             return {
-                nav_items:[
-                    {text:'Home',link:'/'},
-                    {text:'Schedule',link:'/schedule'},
-                    {text:'Another Item',link:null},
+                nav_items: [
+                    {text: 'Home', link: '/'},
+                    {text: 'Schedule', link: '/schedule'},
+                    {text: 'Another Item', link: null},
                 ]
             }
         },
         beforeMount() {
-            if (this.$store.getters.access_token !== null){
+            if (this.$store.getters.access_token !== null) {
                 switch (this.$store.getters.user_role) {
                     case 'admin':
                         this.nav_items = [
-                            {text:'Home',link:'/'},
-                            {text:'Schedule',link:'/schedule'},
-                            {text:'Another Item',link:null},
-                            {text:'Activities',link:'/admin'},
-                            {text:'Schedule',link:'/schedule'},
-                            {text:'Teachers',link:'/admin/teachers'},
-                            {text:'Students',link:'/admin/students'},
+                            {text: 'Home', link: '/'},
+                            {text: 'Schedule', link: '/schedule'},
+                            {text: 'Another Item', link: null},
+                            {text: 'Activities', link: '/admin'},
+                            {text: 'Schedule', link: '/schedule'},
+                            {text: 'Teachers', link: '/admin/teachers'},
+                            {text: 'Students', link: '/admin/students'},
                         ]
                         break
                 }
@@ -45,18 +46,18 @@
 </script>
 
 <style scoped>
-    .home-left-nav{
+    .home-left-nav {
         color: white;
         background-color: #353c48;
         /*padding: 10px;*/
-        -webkit-box-shadow: 0px 0px 3px 1px rgba(0,0,0,0.19);
-        -moz-box-shadow: 0px 0px 3px 1px rgba(0,0,0,0.19);
-        box-shadow: 0px 0px 3px 1px rgba(0,0,0,0.19);
-    }
-    .main{
-        color: white;
+        -webkit-box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.19);
+        -moz-box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.19);
+        box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.19);
     }
 
+    .main {
+        color: white;
+    }
 
 
 </style>

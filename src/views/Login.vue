@@ -1,11 +1,11 @@
 <template>
     <div>
-        <NavBar />
+        <NavBar/>
         <div class="block">
             <div class="login-block">
                 <div class="login">
                     <h2 class="c-center">dl.iitu.kz</h2>
-                    <b-form @submit="onSubmit" >
+                    <b-form @submit="onSubmit">
                         <b-form-group
                                 id="input-group-1"
                                 label="Username"
@@ -42,7 +42,7 @@
 
     export default {
         name: "Login",
-        components:{
+        components: {
             NavBar
         },
         data() {
@@ -56,30 +56,30 @@
         methods: {
             onSubmit(evt) {
                 evt.preventDefault();
-                this.$store.dispatch('retrieveUser',{
+                this.$store.dispatch('retrieveUser', {
                     username: this.form.username,
                     password: this.form.password
                 })
-                .then(response => {
-                    switch (response.data.role.role) {
-                        case 'student':
-                            this.$router.push({name:"Courses"})
-                            break;
-                        case 'admin':
-                            this.$router.push({name: "Admin"})
-                            break
-                        case 'teacher':
-                            this.$router.push({name:"Courses"})
-                            break
-                    }
-                });
+                    .then(response => {
+                        switch (response.data.role.role) {
+                            case 'student':
+                                this.$router.push({name: "Courses"})
+                                break;
+                            case 'admin':
+                                this.$router.push({name: "Admin"})
+                                break
+                            case 'teacher':
+                                this.$router.push({name: "Courses"})
+                                break
+                        }
+                    });
             }
         }
     }
 </script>
 
 <style scoped>
-    .login-block{
+    .login-block {
         display: grid;
         /* border: 2px solid red; */
         /*height: 80vh;*/
@@ -88,19 +88,19 @@
         margin-top: 8%;
     }
 
-    .login{
+    .login {
         /* border: 1px solid red; */
-         max-width: 50%;
+        max-width: 50%;
         width: 30%;
         padding: 55px;
         background-color: #353c48;
         color: beige;
-        -webkit-box-shadow: 0px 3px 3px 1px rgba(0,0,0,0.19);
-        -moz-box-shadow: 0px 3px 3px 1px rgba(0,0,0,0.19);
-        box-shadow: 0px 3px 3px 1px rgba(0,0,0,0.19);
+        -webkit-box-shadow: 0px 3px 3px 1px rgba(0, 0, 0, 0.19);
+        -moz-box-shadow: 0px 3px 3px 1px rgba(0, 0, 0, 0.19);
+        box-shadow: 0px 3px 3px 1px rgba(0, 0, 0, 0.19);
     }
 
-    .c-center{
+    .c-center {
         text-align: center;
     }
 
