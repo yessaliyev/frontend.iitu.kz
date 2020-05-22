@@ -24,7 +24,7 @@
     import NavBar from "../components/navigation/NavBar";
     import HomeLeftNav from "../components/navigation/HomeLeftNav";
     import LeftStaticNav from "../components/navigation/LeftStaticNav";
-    import Tabs from "../components/navigation/Tabs";
+    import Tabs from "../components/navigation/TeacherTabs";
     // import { D3LineChart } from 'vue-d3-charts';
 
 

@@ -23,25 +23,6 @@
     export default {
         name: "Admin",
         components: {NavBar, Register, HomeLeftNav},
-        //
-        // beforeMount() {
-        //     if (this.$store.getters.access_token !== null){
-        //         axios.get(process.env.VUE_APP_API+'api/user/get',
-        //             {headers: {Authorization: "Bearer " + this.$store.getters.access_token}})
-        //             .then(response => {
-        //                 if (response.status !== 200 || response.data.role.role !== 'admin'){
-        //                     this.$router.push({name: "Login"})
-        //                 }
-        //             })
-        //             .catch( error => {
-        //                 if (error.response.status === 401){
-        //                     this.$router.push({name: "Login"})
-        //                 }
-        //             })
-        //     }else{
-        //         this.$router.push({name: "Login"})
-        //     }
-        // }
     }
 </script>
 

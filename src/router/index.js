@@ -35,16 +35,26 @@ const routes = [
         }
     },
     {
-        path: 'courses',
+        path: '/courses',
         name: 'Courses',
-        component: Courses
+        component: Courses,
+        beforeEnter(to, from, next) {
+            auth.methods.check(store.getters.user_role, true)
+                .then(() => {
+                    next()
+                })
+                .catch(() => {
+                    // console.log(e)
+                    next({name: "Login"})
+                })
+        }
     },
     {
         path: '/admin',
         name: 'Admin',
         component: Admin,
         beforeEnter(to, from, next) {
-            auth.methods.check('teacher')
+            auth.methods.check('admin')
                 .then(() => {
                     next()
                 })

@@ -22,7 +22,7 @@
 
     export default {
         components: {Groups, AddLesson},
-        name: "Tabs"
+        name: "TeacherTabs",
     }
 </script>
 

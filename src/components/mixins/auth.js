@@ -5,8 +5,6 @@ export default {
     methods: {
         /*
         * Принемает на вход role, is_auth[optional]
-        * если указан is_auth true то проверяет только
-        * аутентификацию пользователя
         * */
         check(role, is_auth = false) {
             return new Promise(((resolve, reject) => {

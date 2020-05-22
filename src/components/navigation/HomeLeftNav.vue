@@ -21,7 +21,6 @@
                 nav_items: [
                     {text: 'Home', link: '/'},
                     {text: 'Schedule', link: '/schedule'},
-                    {text: 'Another Item', link: null},
                 ]
             }
         },
@@ -29,15 +28,11 @@
             if (this.$store.getters.access_token !== null) {
                 switch (this.$store.getters.user_role) {
                     case 'admin':
-                        this.nav_items = [
-                            {text: 'Home', link: '/'},
-                            {text: 'Schedule', link: '/schedule'},
-                            {text: 'Another Item', link: null},
+                        this.nav_items.push([
                             {text: 'Activities', link: '/admin'},
-                            {text: 'Schedule', link: '/schedule'},
                             {text: 'Teachers', link: '/admin/teachers'},
                             {text: 'Students', link: '/admin/students'},
-                        ]
+                        ]);
                         break
                 }
             }
