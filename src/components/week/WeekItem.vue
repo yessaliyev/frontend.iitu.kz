@@ -5,20 +5,13 @@
         </div>
         <div v-if="this.$store.getters.user_role === 'teacher' " class="actions">
             <div class="h5 m-auto">
-                <router-link :to="{ name: 'GroupAttendancePage',params: { lesson_id: 1}}">
-                    <b-icon-forward-fill/>
-                </router-link>
-                <router-link :to="{ name: 'CoursePage'}">
+                    <b-icon-forward-fill v-b-modal = "this.id.toString()"/>
                     <b-icon-gear-fill/>
-                </router-link>
-                <router-link :to="{ name: 'CoursePage'}">
                     <b-icon-x-circle-fill/>
-                </router-link>
             </div>
         </div>
 
         <div>
-            <b-button v-b-modal = "this.id.toString()">Open Modal</b-button>
             <b-modal
                     :id = "this.id.toString()"
                     ref="modal"
@@ -41,6 +34,14 @@
                                 required
                         ></b-form-input>
                     </b-form-group>
+                    <b-form-textarea
+                            id="textarea"
+                            v-model="this.text"
+                            placeholder="text..."
+                            rows="3"
+                            max-rows="6"
+                    ></b-form-textarea>
+                    <b-form-file multiple :file-name-formatter="formatNames" class="file"></b-form-file>
                 </form>
             </b-modal>
         </div>
@@ -56,10 +57,22 @@
                 id: this.item.id,
                 name: '',
                 nameState: null,
-                submittedNames: []
+                submittedNames: [],
+                text: '',
+                item_files:[]
             }
         },
         methods: {
+            formatNames(files) {
+                if (files.length === 1) {
+                    this.item_files = files
+                    return files[0].name
+                } else {
+                    this.item_files = files
+                    console.log(this.item_files)
+                    return `${files.length} files selected`
+                }
+            },
             checkFormValidity() {
                 const valid = this.$refs.form.checkValidity()
                 this.nameState = valid
@@ -80,9 +93,9 @@
                 if (!this.checkFormValidity()) {
                     return
                 }
-                // Push the name to submitted names
-                this.submittedNames.push(this.name)
-                // Hide the modal manually
+
+                //post_request
+
                 this.$nextTick(() => {
                     this.$bvModal.hide('modal-prevent-closing')
                 })
@@ -101,5 +114,9 @@
     }
     .actions svg{
         color: white;
+    }
+
+    .file{
+        margin-top: 15px;
     }
 </style>
