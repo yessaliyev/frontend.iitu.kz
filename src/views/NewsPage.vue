@@ -15,9 +15,9 @@
                     <h5>{{news_item.title}}</h5>
                     <div class="dark-back">
                         <div class="item">
-                            <p>
+                            <pre>
                                 {{news_item.content}}
-                            </p>
+                            </pre>
                         </div>
                     </div>
                 </div>
@@ -41,13 +41,15 @@
         },
         data(){
             return {
-                news_item:null
+                news_item:{}
             }
         },
-        mounted() {
+        beforeMount() {
             axios.get(process.env.VUE_APP_API + 'api/news/get-by-id' + '?news_id='+this.$route.params.news_id)
                 .then(response => {
+                    console.log(response.data.title)
                     this.news_item = response.data
+                    // this.news_item.content = this.news_item.content.replace(/\n/g, "<br>");
                 })
                 .catch( (e) => {
                     console.log(e)
@@ -56,9 +58,17 @@
     }
 </script>
 
-<style>
+<style scoped>
     .item{
         padding: 20px;
+    }
+    .item pre {
+        color: white;
+        white-space: -moz-pre-wrap; /* Mozilla, supported since 1999 */
+        white-space: -pre-wrap; /* Opera */
+        white-space: -o-pre-wrap; /* Opera */
+        white-space: pre-wrap; /* CSS3 - Text module (Candidate Recommendation) http://www.w3.org/TR/css3-text/#white-space */
+        word-wrap: break-word; /* IE 5.5+ */
     }
 
 </style>
