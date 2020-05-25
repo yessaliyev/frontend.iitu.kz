@@ -1,9 +1,11 @@
 <template>
-    <div class="item">
+    <div class="item border">
         <h5>{{item.title}}</h5>
         <p>
             {{item.content}}
         </p>
+        <p>{{item.created_at}}</p>
+
         <router-link :to="{ name: 'NewsPage', params:{news_id:item.id}}">Link</router-link>
     </div>
 </template>
