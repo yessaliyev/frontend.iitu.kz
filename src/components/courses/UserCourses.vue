@@ -1,6 +1,6 @@
 <template>
     <div class="courses ">
-        <h5>My Courses</h5>
+        <h5>My CoursesPage</h5>
         <CourseItem
                 v-for="item in courses" :key="item.id"
                 v-bind:item="item"
@@ -13,7 +13,7 @@
     import axios from "axios";
 
     export default {
-        name: "Courses",
+        name: "CoursesPage",
         components: {CourseItem},
         data() {
             return {
@@ -28,7 +28,7 @@
                 })
                 .catch((error) => {
                     if (error.response.status === 401) {
-                        this.$router.push({name: "Login"})
+                        this.$router.push({name: "LoginPage"})
                     }
                 });
         }

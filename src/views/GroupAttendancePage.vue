@@ -27,7 +27,7 @@
     // import { D3LineChart } from 'vue-d3-charts';
 
     export default {
-        name: "GroupAttendance",
+        name: "GroupAttendancePage",
         components: {
             NavBar,
             HomeLeftNav,

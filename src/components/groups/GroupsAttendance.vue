@@ -19,13 +19,13 @@
         >
             <template v-slot:cell(actions)="row">
                 <div class="h5 mb-0">
-                    <router-link :to="{ name: 'GroupAttendance',params: { lesson_id: row.item.id}}">
+                    <router-link :to="{ name: 'GroupAttendancePage',params: { lesson_id: row.item.id}}">
                         <b-icon-forward-fill/>
                     </router-link>
-                    <router-link :to="{ name: 'Course'}">
+                    <router-link :to="{ name: 'CoursePage'}">
                         <b-icon-gear-fill/>
                     </router-link>
-                    <router-link :to="{ name: 'Course'}">
+                    <router-link :to="{ name: 'CoursePage'}">
                         <b-icon-x-circle-fill/>
                     </router-link>
                 </div>

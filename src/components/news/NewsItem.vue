@@ -4,6 +4,7 @@
         <p>
             {{item.content}}
         </p>
+        <router-link :to="{ name: 'NewsPage', params:{news_id:item.id}}">Link</router-link>
     </div>
 </template>
 
@@ -11,7 +12,11 @@
     export default {
         name: "NewsItem",
         props: ['item'],
-
+        beforeMount() {
+            let maxLength = 500
+            let trimmedString = this.item.content.substr(0, maxLength);
+            this.item.content = trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(" "))) + ' ...'
+        }
     }
 </script>
 
@@ -31,6 +36,10 @@
     .item:hover {
         background-color: #444c58;
         transition: 0.3s;
+    }
+
+    .item a {
+        color: wheat;
     }
 
 </style>

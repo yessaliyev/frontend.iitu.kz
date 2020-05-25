@@ -29,7 +29,7 @@
     import LeftStaticNav from "../components/navigation/LeftStaticNav";
 
     export default {
-        name: 'Home',
+        name: 'HomePage',
         components: {
             NavBar,
             HomeLeftNav,

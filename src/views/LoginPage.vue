@@ -41,7 +41,7 @@
     import NavBar from "../components/navigation/NavBar";
 
     export default {
-        name: "Login",
+        name: "LoginPage",
         components: {
             NavBar
         },
@@ -63,13 +63,13 @@
                     .then(response => {
                         switch (response.data.role.role) {
                             case 'student':
-                                this.$router.push({name: "Courses"})
+                                this.$router.push({name: "CoursesPage"})
                                 break;
                             case 'admin':
-                                this.$router.push({name: "Admin"})
+                                this.$router.push({name: "AdminPage"})
                                 break
                             case 'teacher':
-                                this.$router.push({name: "Courses"})
+                                this.$router.push({name: "CoursesPage"})
                                 break
                         }
                     });

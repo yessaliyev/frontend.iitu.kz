@@ -21,7 +21,7 @@
     import HomeLeftNav from "../components/navigation/HomeLeftNav";
 
     export default {
-        name: "Admin",
+        name: "AdminPage",
         components: {NavBar, Register, HomeLeftNav},
     }
 </script>

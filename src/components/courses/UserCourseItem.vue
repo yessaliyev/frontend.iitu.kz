@@ -2,7 +2,7 @@
     <div class="item ">
         <div class="">
             <!--            <a :href=" '/course/' + item.id">{{item.name_en}}</a>-->
-            <router-link :to="{ name: 'Course', params: { subject_id: item.id }}">{{item.name_en}}</router-link>
+            <router-link :to="{ name: 'CoursePage', params: { subject_id: item.id }}">{{item.name_en}}</router-link>
         </div>
     </div>
 </template>

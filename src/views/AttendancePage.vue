@@ -29,7 +29,7 @@
 
 
     export default {
-        name: "Attendance",
+        name: "AttendancePage",
         components: {
             NavBar,
             HomeLeftNav,

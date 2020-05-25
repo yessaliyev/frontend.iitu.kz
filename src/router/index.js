@@ -1,31 +1,32 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
-import Admin from "../views/Admin";
-import Login from "../views/Login";
-import Attendance from "../views/Attendance";
-import Course from "../views/Course";
+import HomePage from '../views/HomePage.vue'
+import AdminPage from "../views/AdminPage";
+import LoginPage from "../views/LoginPage";
+import AttendancePage from "../views/AttendancePage";
+import CoursePage from "../views/CoursePage";
 import auth from "../components/mixins/auth";
 import store from "../store/index";
-import GroupAttendance from "../views/GroupAttendance";
-import Courses from "../views/Courses";
+import GroupAttendancePage from "../views/GroupAttendancePage";
+import CoursesPage from "../views/CoursesPage";
+import NewsPage from "../views/NewsPage";
 
 Vue.use(VueRouter)
 
 const routes = [
     {
         path: '/',
-        name: 'Home',
-        component: Home
+        name: 'HomePage',
+        component: HomePage
     },
     {
         path: '/login',
-        name: 'Login',
-        component: Login,
+        name: 'LoginPage',
+        component: LoginPage,
         beforeEnter(to, from, next) {
             auth.methods.check(store.getters.user_role, true)
                 .then(() => {
-                    next({name: "Home"})
+                    next({name: "HomePage"})
 
                 })
                 .catch(() => {
@@ -36,8 +37,8 @@ const routes = [
     },
     {
         path: '/courses',
-        name: 'Courses',
-        component: Courses,
+        name: 'CoursesPage',
+        component: CoursesPage,
         beforeEnter(to, from, next) {
             auth.methods.check(store.getters.user_role, true)
                 .then(() => {
@@ -45,14 +46,14 @@ const routes = [
                 })
                 .catch(() => {
                     // console.log(e)
-                    next({name: "Login"})
+                    next({name: "LoginPage"})
                 })
         }
     },
     {
         path: '/admin',
-        name: 'Admin',
-        component: Admin,
+        name: 'AdminPage',
+        component: AdminPage,
         beforeEnter(to, from, next) {
             auth.methods.check('admin')
                 .then(() => {
@@ -60,14 +61,14 @@ const routes = [
                 })
                 .catch(() => {
                     // console.log(e)
-                    next({name: "Login"})
+                    next({name: "LoginPage"})
                 })
         }
     },
     {
         path: '/course/:subject_id',
-        name: 'Course',
-        component: Course,
+        name: 'CoursePage',
+        component: CoursePage,
         beforeEnter(to, from, next) {
             auth.methods.check(store.getters.user_role, true)
                 .then(() => {
@@ -75,14 +76,14 @@ const routes = [
                 })
                 .catch(() => {
                     // console.log(e)
-                    next({name: "Login"})
+                    next({name: "LoginPage"})
                 })
         }
     },
     {
         path: '/attendance/lesson/:lesson_id',
-        name: 'GroupAttendance',
-        component: GroupAttendance,
+        name: 'GroupAttendancePage',
+        component: GroupAttendancePage,
         beforeEnter(to, from, next) {
             auth.methods.check('teacher')
                 .then(() => {
@@ -90,14 +91,14 @@ const routes = [
                 })
                 .catch(() => {
                     // console.log(e)
-                    next({name: "Login"})
+                    next({name: "LoginPage"})
                 })
         }
     },
     {
         path: '/attendance/course/:subject_id',
-        name: 'Attendance',
-        component: Attendance,
+        name: 'AttendancePage',
+        component: AttendancePage,
         beforeEnter(to, from, next) {
             auth.methods.check(store.getters.user_role, true)
                 .then(() => {
@@ -105,10 +106,15 @@ const routes = [
                 })
                 .catch(() => {
                     // console.log()
-                    next({name: "Login"})
+                    next({name: "LoginPage"})
                 })
         }
     },
+    {
+        path: '/news/:news_id',
+        name: 'NewsPage',
+        component: NewsPage
+    }
 ]
 
 const router = new VueRouter({

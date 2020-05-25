@@ -21,7 +21,7 @@
     import NavBar from "../components/navigation/NavBar";
 
     export default {
-        name: "Courses",
+        name: "CoursesPage",
         components: {UserCourses, HomeLeftNav, NavBar}
     }
 </script>

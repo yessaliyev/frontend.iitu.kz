@@ -20,7 +20,7 @@
                     <b-dropdown right :text="logged_user.username">
                         <b-dropdown-item href="#">My profile</b-dropdown-item>
                         <b-dropdown-item>
-                            <router-link :to="{ name: 'Courses'}">My Courses</router-link>
+                            <router-link :to="{ name: 'CoursesPage'}">My CoursesPage</router-link>
                         </b-dropdown-item>
                         <b-dropdown-item @click="logout">logout</b-dropdown-item>
                     </b-dropdown>
@@ -56,7 +56,7 @@
             logout() {
                 this.$store.dispatch('logout')
                     .then(() => {
-                        this.$router.push({name: "Home"})
+                        this.$router.push({name: "HomePage"})
                     });
             }
         }

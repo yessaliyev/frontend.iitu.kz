@@ -152,7 +152,7 @@
                     })
                     .catch((error) => {
                         if (error.response.status === 401) {
-                            this.$router.push({name: "Login"})
+                            this.$router.push({name: "LoginPage"})
                         }
                     });
             },
@@ -167,7 +167,7 @@
                     })
                     .catch((error) => {
                         if (error.response.status === 401) {
-                            this.$router.push({name: "Login"})
+                            this.$router.push({name: "LoginPage"})
                         }
                     });
             },
@@ -182,7 +182,7 @@
                     })
                     .catch((error) => {
                         if (error.response.status === 401) {
-                            this.$router.push({name: "Login"})
+                            this.$router.push({name: "LoginPage"})
                         }
                     });
             },

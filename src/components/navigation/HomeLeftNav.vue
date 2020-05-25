@@ -19,7 +19,7 @@
         data() {
             return {
                 nav_items: [
-                    {text: 'Home', link: '/'},
+                    {text: 'HomePage', link: '/'},
                     {text: 'Schedule', link: '/schedule'},
                 ]
             }
