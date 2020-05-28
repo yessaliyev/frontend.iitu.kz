@@ -1,49 +1,61 @@
 <template>
-    <div class="item">
-        <div class="date">
-            <p>{{item.start}} - {{item.end}}</p>
-        </div>
-        <div v-if="this.$store.getters.user_role === 'teacher' " class="actions">
-            <div class="h5 m-auto">
-                <b-icon-forward-fill v-b-modal="this.id.toString()"/>
-                <b-icon-gear-fill/>
-                <b-icon-x-circle-fill/>
+    <div class="block">
+        <div class="item">
+            <div class="date">
+                <p>{{item.start}} - {{item.end}}</p>
+            </div>
+            <div v-if="this.$store.getters.user_role === 'teacher' " class="actions">
+                <div class="h5 m-auto">
+                    <b-icon-forward-fill v-b-modal="this.id.toString()"/>
+                    <b-icon-gear-fill/>
+                    <b-icon-x-circle-fill/>
+                </div>
+            </div>
+            <div>
+                <b-modal
+                        :id="this.id.toString()"
+                        ref="modal"
+                        title="Add Task"
+                        @show="resetModal"
+                        @hidden="resetModal"
+                        @ok="handleOk"
+                >
+                    <form ref="form" @submit.stop.prevent="handleSubmit">
+                        <b-form-group
+                                :state="titleState"
+                                label="Title"
+                                label-for="title-input"
+                                invalid-feedback="Name is required"
+                        >
+                            <b-form-input
+                                    id="title-input"
+                                    v-model="title"
+                                    :state="titleState"
+                                    required
+                            ></b-form-input>
+                        </b-form-group>
+                        <b-form-textarea
+                                id="textarea"
+                                v-model="content"
+                                placeholder="text..."
+                                rows="3"
+                                max-rows="6"
+                        ></b-form-textarea>
+                        <b-form-file multiple :file-name-formatter="formatNames" class="file"></b-form-file>
+                    </form>
+                </b-modal>
             </div>
         </div>
-
-        <div>
-            <b-modal
-                    :id="this.id.toString()"
-                    ref="modal"
-                    title="Add Task"
-                    @show="resetModal"
-                    @hidden="resetModal"
-                    @ok="handleOk"
-            >
-                <form ref="form" @submit.stop.prevent="handleSubmit">
-                    <b-form-group
-                            :state="titleState"
-                            label="Title"
-                            label-for="title-input"
-                            invalid-feedback="Name is required"
-                    >
-                        <b-form-input
-                                id="title-input"
-                                v-model="title"
-                                :state="titleState"
-                                required
-                        ></b-form-input>
-                    </b-form-group>
-                    <b-form-textarea
-                            id="textarea"
-                            v-model="content"
-                            placeholder="text..."
-                            rows="3"
-                            max-rows="6"
-                    ></b-form-textarea>
-                    <b-form-file multiple :file-name-formatter="formatNames" class="file"></b-form-file>
-                </form>
-            </b-modal>
+        <div class="task" v-if=" item.task !== null ">
+            <div class="title">
+               {{item.task.title}}
+            </div>
+            <div class="title">
+                {{item.task.content}}
+            </div>
+            <div class="files" v-for="(file,index) in item.task.filenames" :key="index">
+<!--                {{index}}. <a :href=process.env.VUE_APP_API>{{file}}</a>-->
+            </div>
         </div>
     </div>
 </template>
@@ -148,7 +160,7 @@
         grid-template-columns: 0.1fr 0.1fr;
         justify-content: space-between;
         align-items: center;
-        border-bottom: 1px solid #444c58;
+        /*border-bottom: 1px solid #444c58;*/
     }
 
     .actions svg {

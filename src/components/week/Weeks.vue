@@ -4,7 +4,7 @@
         <div class="weeks">
             <WeekItem
                     v-for="item in weeks" :key="item.id"
-                    v-bind:item="item"
+                    v-bind:item="item" class="border-bottom"
             />
         </div>
     </div>
