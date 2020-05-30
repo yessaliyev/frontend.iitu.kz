@@ -54,6 +54,7 @@
                 {{item.task.content}}
             </div>
             <div class="files" v-for="(file,index) in item.task.filenames" :key="index">
+                {{file}}
 <!--                {{index}}. <a :href=process.env.VUE_APP_API>{{file}}</a>-->
             </div>
         </div>
@@ -72,7 +73,7 @@
                 title: '',
                 titleState: null,
                 submittedNames: [],
-                content: '',
+                content: null,
                 item_files: []
             }
         },
@@ -80,12 +81,9 @@
             formatNames(files) {
                 if (files.length === 1) {
                     this.item_files = files
-                    // console.log(files)
-                    console.log(this.item_files);
                     return files[0].name
                 } else {
                     this.item_files = files
-                    console.log(this.item_files)
                     return `${files.length} files selected`
                 }
             },
@@ -113,9 +111,7 @@
                 form_data.append('week_id', this.id)
                 form_data.append('subject_id', this.$route.params.subject_id)
                 form_data.append('title', this.title)
-
-                console.log(this.item_files.length)
-
+                form_data.append('content', this.content)
 
                 if (this.item_files.length > 0) {
                     for( let i = 0; i < this.item_files.length; i++ ){
@@ -123,8 +119,6 @@
                         form_data.append('files[' + i + ']', file);
                     }
                 }
-                console.log(form_data.getAll('files'))
-                //post_request
 
                 axios.post(process.env.VUE_APP_API + 'api/subject/add-to-week', form_data,
                     {

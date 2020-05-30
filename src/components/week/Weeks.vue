@@ -26,9 +26,7 @@
             }
         },
         beforeMount() {
-            const url = this.role === 'student' ? 'get-student-weeks' : 'get-teacher-weeks'
-
-            axios.get(process.env.VUE_APP_API + 'api/subject/' + url,
+            axios.get(process.env.VUE_APP_API + 'api/subject/get-weeks',
                 {headers: {Authorization: "Bearer " + this.$store.getters.access_token}})
                 .then((response) => {
                     this.weeks = response.data
