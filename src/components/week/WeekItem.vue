@@ -48,14 +48,15 @@
         </div>
         <div class="task" v-if=" item.task !== null ">
             <div class="title">
-               {{item.task.title}}
+                <h5>{{item.task.title}}</h5>
             </div>
-            <div class="title">
-                {{item.task.content}}
+            <div class="content">
+                <p>
+                    {{item.task.content}}
+                </p>
             </div>
             <div class="files" v-for="(file,index) in item.task.filenames" :key="index">
-                {{file}}
-<!--                {{index}}. <a :href=process.env.VUE_APP_API>{{file}}</a>-->
+                {{index+1}}. <a :href="url + 'uploads/' + file">{{file}}</a>
             </div>
         </div>
     </div>
@@ -69,6 +70,7 @@
         props: ['item'],
         data() {
             return {
+                url: null,
                 id: this.item.id,
                 title: '',
                 titleState: null,
@@ -114,7 +116,7 @@
                 form_data.append('content', this.content)
 
                 if (this.item_files.length > 0) {
-                    for( let i = 0; i < this.item_files.length; i++ ){
+                    for (let i = 0; i < this.item_files.length; i++) {
                         let file = this.item_files[i];
                         form_data.append('files[' + i + ']', file);
                     }
@@ -144,6 +146,9 @@
                     this.$bvModal.hide(this.id.toString())
                 })
             },
+        },
+        mounted() {
+            this.url = process.env.VUE_APP_API
         }
     }
 </script>
@@ -164,4 +169,17 @@
     .file {
         margin-top: 15px;
     }
+
+    .content{
+        width: 80%;
+    }
+
+    /*.content pre {*/
+    /*    color: white;*/
+    /*    white-space: -moz-pre-wrap; !* Mozilla, supported since 1999 *!*/
+    /*    white-space: -pre-wrap; !* Opera *!*/
+    /*    white-space: -o-pre-wrap; !* Opera *!*/
+    /*    white-space: pre-wrap; !* CSS3 - Text module (Candidate Recommendation) http://www.w3.org/TR/css3-text/#white-space *!*/
+    /*    word-wrap: break-word; !* IE 5.5+ *!*/
+    /*}*/
 </style>
