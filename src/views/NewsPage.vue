@@ -47,7 +47,7 @@
         beforeMount() {
             axios.get(process.env.VUE_APP_API + 'api/news/get-by-id' + '?news_id='+this.$route.params.news_id)
                 .then(response => {
-                    console.log(response.data.title)
+                    // console.log(response.data.title)
                     this.news_item = response.data
                     // this.news_item.content = this.news_item.content.replace(/\n/g, "<br>");
                 })

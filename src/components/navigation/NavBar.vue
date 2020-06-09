@@ -7,20 +7,20 @@
                 </div>
             </div>
             <div v-if="logged_user.length === 0" class="c-navbar-item">
-                <b-nav-text class='c-message'>Вы не вошли в систему</b-nav-text>
+                <b-nav-text class='c-message'>You are not logged in</b-nav-text>
             </div>
             <div v-if="logged_user.length === 0" class="c-navbar-item">
-                <b-nav-item href="/login" class="">Вход</b-nav-item>
+                <b-nav-item href="/login" class="">Login</b-nav-item>
             </div>
             <div v-if="logged_user.length !== 0" class="c-navbar-item">
-                <b-nav-text class='c-message'>Добро пожаловать</b-nav-text>
+                <b-nav-text class='c-message'>Welcome</b-nav-text>
             </div>
             <div v-if="logged_user.length !== 0" class="c-navbar-item ">
                 <div class="c-navbar-dropdown">
                     <b-dropdown right :text="logged_user.username">
                         <b-dropdown-item href="#">My profile</b-dropdown-item>
                         <b-dropdown-item>
-                            <router-link :to="{ name: 'CoursesPage'}">My CoursesPage</router-link>
+                            <router-link :to="{ name: 'CoursesPage'}">My Courses</router-link>
                         </b-dropdown-item>
                         <b-dropdown-item @click="logout">logout</b-dropdown-item>
                     </b-dropdown>

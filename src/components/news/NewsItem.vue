@@ -1,5 +1,5 @@
 <template>
-    <div class="item border">
+    <div class="item">
         <h5>{{item.title}}</h5>
         <p>
             {{item.content}}

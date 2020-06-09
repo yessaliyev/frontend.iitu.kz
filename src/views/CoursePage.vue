@@ -12,7 +12,7 @@
             </div>
             <div class="main-block-items">
                 <div class="course-nav">
-                    <h4>test Title</h4>
+                    <h4>{{title.name_en}}</h4>
                     <div class="course-nav-items">
                         <vertical-nav-item
                                 v-for="item in subject_nav" :key="item.id"
@@ -35,6 +35,7 @@
     import VerticalNavItem from "../components/navigation/VerticalNavItem";
 
     import Weeks from "../components/week/Weeks";
+    import axios from "axios";
 
     export default {
         name: 'CoursePage',
@@ -44,17 +45,29 @@
             HomeLeftNav,
             LeftStaticNav,
             VerticalNavItem,
-            Weeks
+            Weeks,
         },
         data() {
             return {
                 subject_nav: [
                     {id: 0, text: 'Announcements', link: '#'},
                     {id: 1, text: 'Materials', link: '#'},
-                    {id: 2, text: 'AttendancePage', link: '/attendance/course/' + this.$route.params.subject_id},
-                ]
+                    {id: 2, text: 'Attendance', link: '/attendance/course/' + this.$route.params.subject_id},
+                ],
+                title:'Course',
             }
         },
+        beforeMount() {
+            axios.get(process.env.VUE_APP_API + 'api/subject/get-subject-by-id?id=' + this.$route.params.subject_id,
+                {headers: {Authorization: "Bearer " + this.$store.getters.access_token}})
+                .then(response => {
+                    this.title = response.data
+                })
+                .catch( () => {
+                    // console.log(error)
+                });
+            // console.log(this.$route.params)
+        }
 
     }
 </script>

@@ -19,8 +19,11 @@
         data() {
             return {
                 nav_items: [
-                    {text: 'HomePage', link: '/'},
-                    {text: 'Schedule', link: '/schedule'},
+                    {text: 'Home', link: '/'},
+                    {text: 'Schedule', link: '#'},
+                    {text: 'Courses', link: '/courses'},
+                    {text: 'Attendance', link: '#'},
+                    {text: 'GPA', link: '#'},
                 ]
             }
         },

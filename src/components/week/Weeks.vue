@@ -4,7 +4,7 @@
         <div class="weeks">
             <WeekItem
                     v-for="item in weeks" :key="item.id"
-                    v-bind:item="item" class="border-bottom"
+                    v-bind:item="item" class=""
             />
         </div>
     </div>
@@ -45,4 +45,5 @@
         -moz-box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.19);
         box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.19);
     }
+
 </style>

@@ -191,7 +191,7 @@
                         this.role_options.push({text: role.role, value: {role_id: role.id, role_name: role.role}})
                     }
                 })
-                .catch(function () {
+                .catch(() => {
                     // console.log(error)
                 });
         },

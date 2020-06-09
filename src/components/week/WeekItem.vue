@@ -1,6 +1,6 @@
 <template>
     <div class="block">
-        <div class="item">
+        <div class="item border-bottom">
             <div class="date">
                 <p>{{item.start}} - {{item.end}}</p>
             </div>
@@ -154,6 +154,9 @@
 </script>
 
 <style scoped>
+    .block{
+        /*border: 1px solid white;*/
+    }
     .item {
         display: grid;
         grid-template-columns: 0.1fr 0.1fr;
@@ -166,8 +169,8 @@
         color: white;
     }
 
-    .file {
-        margin-top: 15px;
+    .files {
+        /*border: 1px solid red;*/
     }
 
     .content{

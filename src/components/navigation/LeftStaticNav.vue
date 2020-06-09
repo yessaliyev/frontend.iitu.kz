@@ -1,14 +1,14 @@
 <template>
     <div class="main">
-        <h4>Static navigation</h4>
         <div class="home-left-static-nav">
             <b-nav vertical>
-                <b-nav-item active href="#">navigation 1</b-nav-item>
-                <b-nav-item active href="#">Вопросы-ответы по ДО</b-nav-item>
-                <b-nav-item active href="#">Вопросы-ответы по ДО</b-nav-item>
-                <b-nav-item active href="#">Вопросы-ответы по ДО</b-nav-item>
-                <b-nav-item active href="#">Вопросы-ответы по ДО</b-nav-item>
-                <b-nav-item active href="#">Вопросы-ответы по ДО</b-nav-item>
+                <b-nav-item active href="#">Вопросы-ответы по ДО </b-nav-item>
+                <b-nav-item active href="#">Инструкция для обучающихся по online-сдаче экзаменов (ДОТ)</b-nav-item>
+                <b-nav-item active href="#">Приказ о мерах социальной поддержки обучающимся</b-nav-item>
+                <b-nav-item active href="#">Программа АИС Расписания
+                    Академический календарь 2019-2020 уч.год</b-nav-item>
+                <b-nav-item active href="#">Расписание звонков</b-nav-item>
+                <b-nav-item active href="#">Информация по работе с сайтом</b-nav-item>
             </b-nav>
         </div>
     </div>
