@@ -51,8 +51,7 @@
                     this.news_item = response.data
                     // this.news_item.content = this.news_item.content.replace(/\n/g, "<br>");
                 })
-                .catch( (e) => {
-                    console.log(e)
+                .catch( () => {
                 })
         }
     }
