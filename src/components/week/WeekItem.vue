@@ -169,8 +169,8 @@
         color: white;
     }
 
-    .files {
-        /*border: 1px solid red;*/
+    .files a{
+        color: wheat;
     }
 
     .content{
