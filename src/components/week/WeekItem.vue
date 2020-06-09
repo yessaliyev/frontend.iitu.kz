@@ -129,16 +129,10 @@
                             'Content-Type': 'multipart/form-data'
                         }
                     })
-                    .then(response => {
-                        if (response.status === 200) {
-                            console.log(response.data)
-                        }
-                    })
                     .catch((error) => {
                         if (error.response.status === 401) {
                             this.$router.push({name: "LoginPage"})
                         }
-                        console.log(error)
                     })
 
                 //закрыть модальное окно после нажатие ок
