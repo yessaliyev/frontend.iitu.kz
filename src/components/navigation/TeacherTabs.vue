@@ -5,11 +5,8 @@
                 <b-tab title="Lessons">
                     <Groups/>
                 </b-tab>
-                <b-tab title="Add lesson">
+                <b-tab title="Add lesson" v-if="this.$store.getters.user_role === 'teacher'">
                     <add-lesson/>
-                </b-tab>
-                <b-tab title="Disabled">
-
                 </b-tab>
             </b-tabs>
         </div>
