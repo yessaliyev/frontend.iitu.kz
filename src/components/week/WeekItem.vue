@@ -1,6 +1,6 @@
 <template>
     <div class="block">
-        <div class="item border-bottom">
+        <div class="item border-top">
             <div class="date">
                 <p>{{item.start}} - {{item.end}}</p>
             </div>
