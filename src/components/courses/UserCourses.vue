@@ -1,6 +1,6 @@
 <template>
     <div class="courses ">
-        <h5>My CoursesPage</h5>
+        <h5>My Courses</h5>
         <CourseItem
                 v-for="item in courses" :key="item.id"
                 v-bind:item="item"
